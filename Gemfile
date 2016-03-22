@@ -19,6 +19,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
+# Creating bootstrapped forms
+gem 'bootstrap_form'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -47,7 +49,5 @@ group :development do
   gem 'spring'
 
   gem 'tzinfo-data'
-
-  gem 'bootstrap_form'
 end
 

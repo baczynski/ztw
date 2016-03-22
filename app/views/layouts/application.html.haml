@@ -10,10 +10,10 @@
     %nav.navbar.navbar-inverse.navbar-fixed-top
       .container-fluid
         .navbar-header
-          %a
-            = yield :current_page
+          = link_to 'TournamentMaster', root_path, class: 'navbar-brand'
         %ul.nav.navbar-nav
-          = yield :navbar
+          %li= link_to 'Dodaj turniej', new_tournament_path
 
     .container#panel-center
-      = yield :body
+      = render 'layouts/messages'
+      = yield

@@ -1,21 +1,11 @@
-- content_for :current_page do
-  .navbar-brand Lista turniejów
-
-- content_for :navbar do
-  %li
-    %a{href: "#"} Jakiś element 1
-  %li
-    %a{href: "#"} Coś tam 2
-
-=content_for :body do
-  %div.panel.panel-primary#panel-center
-    %div.panel-heading Lista turniejów
-    %div.panel-body
-      %div.list-group
-        - @tournaments.each do |t|
-          %a.list-group-item{href: "#"}
-            =t.name
-            =t.description
-            = "(od #{l t.start_date})"
-            - if t.tournament_type?
-              = "[turniej typu #{t.tournament_type}]"
+%div.panel.panel-primary#panel-center
+  %div.panel-heading Lista turniejów
+  %div.panel-body
+    %div.list-group
+      - @tournaments.each do |t|
+        %a.list-group-item{href: "#"}
+          =t.name
+          =t.description
+          = "(od #{l t.start_date})"
+          - if t.tournament_type?
+            = "[turniej typu #{t.tournament_type}]"
