@@ -1,6 +1,6 @@
 class TournamentsController < ApplicationController
   def index
-  	@tournaments = Tournament.order start_date: :desc
+  	@tournaments = Tournament.order(start_date: :desc).paginate(page: params[:page])
   end
 
   def new
