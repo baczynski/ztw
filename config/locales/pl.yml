@@ -1,0 +1,23 @@
+pl:
+  remember-me: "Pamiętaj mnie"
+  password: "Hasło"
+  sign-in: "Zaloguj"
+  email: "Email"
+  login: "Logowanie"
+  sign-up: "Zarejestruj się"
+  forgot-your-password: "Zapomniałeś hasła?"
+  password-confirmation: "Potwierdź hasło"
+  characters-minimum: "znaków minimum"
+  send-me-reset-password-instructions: "Wyślij mi instrukcję przywrócenia hasła."
+  tournament-name: "Nazwa turnieju"
+  tournament-description: "Opis"
+  start-date: "Data rozpoczęcia"
+  tournament-type: "Typ turnieju"
+  rounds-number: "Liczba rund"
+  add-new-tournament: "Utwórz turniej"
+  begin: "od"
+  tournament-t: "turniej typu"
+
+  time:
+    formats:
+      default: "%a, %d %b %Y %I:%M"

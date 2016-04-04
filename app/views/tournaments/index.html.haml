@@ -1,10 +1,10 @@
-%h1.page-header Lista turniejów
+%h1.page-header= t('tournaments-list')
 - @tournaments.each do |t|
 	%p
 		%h4= t.name
 		= t.description
-		= "(od #{l t.start_date})"
+		=   "(" + t('begin') + "  #{l t.start_date})"
 		- if t.tournament_type?
-			= "[turniej typu #{t.tournament_type}]"
+			= "[" + t('tournament-t') + " #{t.tournament_type}]"
 
 = will_paginate @tournaments

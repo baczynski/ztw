@@ -1,7 +1,7 @@
 = bootstrap_form_for @tournament do |f|
-  = f.text_field :name
-  = f.text_field :description
-  = f.datetime_select :start_date
-  = f.select :tournament_type, [['on-line', 'ONLINE'], ['on-site', 'ONSITE']]
-  = f.number_field :rounds, min: 1
-  = f.submit "Dodaj turniej", :class => 'btn btn-success'
+  = f.text_field :name,label: t('tournament-name')
+  = f.text_field :description, label: t('tournament-description')
+  = f.datetime_select :start_date, label: t('start-date')
+  = f.select :tournament_type, [['on-line', 'ONLINE'], ['on-site', 'ONSITE']],label: t('tournament-type')
+  = f.number_field :rounds, min: 1,label: t('rounds-number')
+  = f.submit t('add-new-tournament'), :class => 'btn btn-success'

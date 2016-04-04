@@ -20,7 +20,25 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  remember-me: "Remember me"
+  password: "Password"
+  sign-in: "Sign in"
+  email: "Email"
+  login: "Login"
+  sign-up: "Sign up"
+  forgot-your-password: "Forgot your password?"
+  password-confirmation: "Password confirmation"
+  characters-minimum: "characters minimum"
+  send-me-reset-password-instructions: "Send me reset password instructions."
+  tournament-name: "Tournament name"
+  tournament-description: "Description"
+  start-date: "Start date"
+  tournament-type: "Tournament type"
+  rounds-number: "Rounds number"
+  add-new-tournament: "Create tournament"
+  begin: "begin"
+  tournament-t: "type"
+
   time:
     formats:
       default: "%a, %d %b %Y %I:%M"

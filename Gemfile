@@ -21,7 +21,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 # Creating bootstrapped forms
 gem 'bootstrap_form'
-# Paginate with will_paginate
+# Paginate with will_paginatecon
 gem 'will_paginate'
 
 # Use jquery as the JavaScript library
@@ -52,6 +52,9 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  # Rails Internationalization
+  gem 'rails-i18n', '~> 4.0.0'
 
   gem 'tzinfo-data'
 end
