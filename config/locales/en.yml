@@ -30,15 +30,20 @@ en:
   password-confirmation: "Password confirmation"
   characters-minimum: "characters minimum"
   send-me-reset-password-instructions: "Send me reset password instructions."
-  tournament-name: "Tournament name"
-  tournament-description: "Description"
-  start-date: "Start date"
-  tournament-type: "Tournament type"
-  rounds-number: "Rounds number"
   add-new-tournament: "Create tournament"
   begin: "begin"
   tournament-t: "type"
+  tournaments-list: "List of tournamets"
 
   time:
     formats:
       default: "%a, %d %b %Y %I:%M"
+
+  activerecord:
+    attributes:
+      tournament:
+        name: "Tournament name"
+        description: "Description"
+        start_date: "Start date"
+        tournament_type: "Tournament type"
+        rounds: "Rounds number"
