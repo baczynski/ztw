@@ -2,7 +2,7 @@
   .container-fluid
     .navbar-header
       = link_to 'TournamentMaster', root_path, class: 'navbar-brand'
-    - if player_signed_in?
+    - if player_signed_in? && current_player.admin?
       %ul.nav.navbar-nav
         %li= link_to t('add-new-tournament'), new_tournament_path
     %ul.nav.navbar-nav.navbar-right

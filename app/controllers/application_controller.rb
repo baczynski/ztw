@@ -13,6 +13,16 @@ class ApplicationController < ActionController::Base
     {locale: I18n.locale}
   end
 
+  def authorize_admin
+    if player_signed_in?
+      unless current_player.admin?
+        redirect_to root_path, flash: {error: I18n.t('access_denied')}
+      end
+    else
+      authenticate_player!
+    end
+  end
+
 private
   def set_locale
     I18n.locale = params[:locale] || :pl

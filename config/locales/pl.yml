@@ -1,4 +1,6 @@
 pl:
+  access_denied: "Dostęp wzbroniony!"
+
   remember-me: "Pamiętaj mnie"
   password: "Hasło"
   sign-in: "Zaloguj się"
