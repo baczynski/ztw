@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
-  devise_for :players
-  root to: 'tournaments#index'
-  resources :tournaments, only: [:index, :new, :create]
+  
+  scope '(:locale)', locale: /pl|en/ do
+
+    devise_for :players
+    root to: 'tournaments#index'
+    resources :tournaments, only: [:index, :new, :create]
+
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

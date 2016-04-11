@@ -1,10 +1,11 @@
 pl:
   remember-me: "Pamiętaj mnie"
   password: "Hasło"
-  sign-in: "Zaloguj"
+  sign-in: "Zaloguj się"
   email: "Email"
   login: "Logowanie"
   sign-up: "Zarejestruj się"
+  sign_out: "Wyloguj się"
   forgot-your-password: "Zapomniałeś hasła?"
   password-confirmation: "Potwierdź hasło"
   characters-minimum: "znaków minimum"

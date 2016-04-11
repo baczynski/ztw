@@ -12,17 +12,22 @@
         .navbar-header
           = link_to 'TournamentMaster', root_path, class: 'navbar-brand'
         %ul.nav.navbar-nav
-          %li= link_to 'Dodaj turniej', new_tournament_path
+          %li= link_to t('add-new-tournament'), new_tournament_path
         %ul.nav.navbar-nav.navbar-right
+          %li
+            - if I18n.locale == :pl
+              = link_to 'English', root_path(locale: :en)
+            - else
+              = link_to 'Polski', root_path(locale: :pl)
           - if player_signed_in?
             %li.dropdown
               %a.dropdown-toggle(href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false")
                 = current_player.email
                 %span.caret
               %ul.dropdown-menu
-                %li= link_to 'Wyloguj się', destroy_player_session_path, method: :delete
+                %li= link_to t('sign_out'), destroy_player_session_path, method: :delete
           - else
-            %li= link_to 'Zaloguj się', player_session_path
+            %li= link_to t('sign-in'), player_session_path
 
     .container#panel-center
       = render 'layouts/messages'
