@@ -1,4 +1,6 @@
 class TournamentsController < ApplicationController
+  before_filter :authenticate_player!, except: [:index]
+
   def index
   	@tournaments = Tournament.order(start_date: :desc).paginate(page: params[:page])
   end
