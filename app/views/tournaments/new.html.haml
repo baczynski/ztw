@@ -1,7 +1,10 @@
-= bootstrap_form_for @tournament do |f|
-  = f.text_field :name
-  = f.text_field :description
-  = f.datetime_select :start_date
-  = f.select :tournament_type, [['on-line', 'ONLINE'], ['on-site', 'ONSITE']]
-  = f.number_field :rounds, min: 1
-  = f.submit t('add-new-tournament'), :class => 'btn btn-success'
+.row
+  .col-sm-8.col-sm-offset-2
+    = bootstrap_form_for @tournament do |f|
+      = f.text_field :name
+      = f.text_area :description
+      / = f.datetime_select :start_date
+      = f.text_field :start_date, icon: 'calendar', class: 'datetimepicker', autocomplete: 'off'
+      = f.select :tournament_type, [['on-line', 'ONLINE'], ['on-site', 'ONSITE']]
+      = f.number_field :rounds, min: 1
+      = f.submit t('add-new-tournament'), :class => 'btn btn-success'

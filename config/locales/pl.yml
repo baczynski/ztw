@@ -23,7 +23,7 @@ pl:
 
   time:
     formats:
-      default: "%a, %d %b %Y %I:%M"
+      default: "%a, %d %b %Y %H:%M"
 
   activerecord:
     attributes:

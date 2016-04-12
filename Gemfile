@@ -28,6 +28,9 @@ gem 'will_paginate'
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
+# Nice Bootstrap date-time picker
+gem 'momentjs-rails'
+gem 'bootstrap3-datetimepicker-rails'
 
 # Authenticate with devise
 gem 'devise'
