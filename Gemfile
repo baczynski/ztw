@@ -24,6 +24,9 @@ gem 'bootstrap_form'
 # Paginate with will_paginatecon
 gem 'will_paginate'
 
+# Rails Internationalization
+gem 'rails-i18n', '~> 4.0.0'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -31,6 +34,8 @@ gem 'turbolinks'
 # Nice Bootstrap date-time picker
 gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails'
+# bootstrap-select packaged for Rails
+gem 'bootstrap-select-rails'
 
 # Authenticate with devise
 gem 'devise'
@@ -55,9 +60,6 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-
-  # Rails Internationalization
-  gem 'rails-i18n', '~> 4.0.0'
 
   gem 'tzinfo-data'
 end

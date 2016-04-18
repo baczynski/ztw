@@ -18,3 +18,6 @@
 
 # Ignore RubyMine config.
 /.idea
+
+# Ignore Visual Paradigm backup files
+/project/*.vpp~*
