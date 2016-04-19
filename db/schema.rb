@@ -11,7 +11,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160411133600) do
+ActiveRecord::Schema.define(version: 20160419131621) do
+
+  create_table "addresses", force: :cascade do |t|
+    t.string   "city"
+    t.string   "zip_code"
+    t.string   "street_and_number"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  create_table "datetimes", force: :cascade do |t|
+    t.integer  "day"
+    t.integer  "month"
+    t.integer  "year"
+    t.integer  "hour"
+    t.integer  "minute"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "matches", force: :cascade do |t|
+    t.integer  "white_player_id"
+    t.integer  "black_player_id"
+    t.integer  "round"
+    t.string   "result"
+    t.integer  "tournament_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
 
   create_table "players", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
@@ -31,6 +59,12 @@ ActiveRecord::Schema.define(version: 20160411133600) do
 
   add_index "players", ["email"], name: "index_players_on_email", unique: true
   add_index "players", ["reset_password_token"], name: "index_players_on_reset_password_token", unique: true
+
+  create_table "results", force: :cascade do |t|
+    t.integer  "result"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "tournaments", force: :cascade do |t|
     t.string   "name"
