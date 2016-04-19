@@ -1,5 +1,6 @@
 class TournamentsController < ApplicationController
   before_filter :authorize_admin, only: [:new, :create]
+  before_filter :authenticate_player!, only: [:register, :unregister]
 
   def index
   	@tournaments = Tournament.order(start_date: :desc).paginate(page: params[:page])
@@ -16,6 +17,22 @@ class TournamentsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def register
+    tournament = Tournament.find(params[:id])
+    if current_player.admin?
+      redirect_to root_path, notice: 'Nie możesz zarejestrować się na turniej!'
+    else
+      tournament.players << current_player
+      redirect_to root_path, notice: 'Zostałeś zarejestrowany na turniej'
+    end
+  end
+
+  def unregister
+    tournament = Tournament.find(params[:id])
+    tournament.players.delete(current_player)
+    redirect_to root_path, notice: 'Zostałeś wyrejestrowany z turnieju'
   end
 
 private

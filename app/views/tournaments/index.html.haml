@@ -1,10 +1,19 @@
 %h1.page-header= t('tournaments-list')
 - @tournaments.each do |t|
-	%p
-		%h4= t.name
-		= t.description
-		=   "(" + t('begin') + "  #{l t.start_date})"
-		- if t.tournament_type?
-			= "[" + t('tournament-t') + " #{t.tournament_type}]"
+  %p
+    %h4
+      = t.name
+      - unless current_player.try(:admin?) || DateTime.now > t.start_date
+        %small
+          (
+          - if player_signed_in? && current_player.tournament_ids.include?(t.id)
+            = link_to 'Wyrejestruj się', unregister_tournament_path(id: t.id), method: :post
+          - else
+            = link_to 'Zarejestruj się', register_tournament_path(id: t.id), method: :post
+          )
+    = t.description
+    =   "(" + t('begin') + "  #{l t.start_date})"
+    - if t.tournament_type?
+      = "[" + t('tournament-t') + " #{t.tournament_type}]"
 
 = will_paginate @tournaments

@@ -4,7 +4,12 @@ Rails.application.routes.draw do
 
     devise_for :players
     root to: 'tournaments#index'
-    resources :tournaments, only: [:index, :new, :create]
+    resources :tournaments, only: [:index, :new, :create] do
+      member do
+        post 'register'
+        post 'unregister'
+      end
+    end
 
   end
 
