@@ -12,4 +12,6 @@ class Tournament < ActiveRecord::Base
   validates :rounds, numericality: {only_integer: true, greater_than: 0}
 
   self.per_page = 20
+
+  has_many :matches
 end
