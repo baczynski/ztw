@@ -62,3 +62,5 @@ en:
     index:
       register: "Register"
       unregister: "Unregister"
+      upcoming: "Upcoming tournaments"
+      finished: "Past tournaments"

@@ -5,6 +5,7 @@ class Tournament < ActiveRecord::Base
   }
 
   has_and_belongs_to_many :players
+  has_many :matches
 
   validates :name, :description, :start_date, :tournament_type, :rounds, presence: true
   validates :tournament_type, inclusion: {in: TOURNAMENT_TYPE.keys}
@@ -13,5 +14,11 @@ class Tournament < ActiveRecord::Base
 
   self.per_page = 20
 
-  has_many :matches
+  def self.upcoming
+    where(arel_table[:start_date].gteq(DateTime.now))
+  end
+
+  def self.finished
+    where(arel_table[:start_date].lt(DateTime.now))
+  end
 end

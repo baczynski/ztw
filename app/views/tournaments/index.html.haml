@@ -1,16 +1,22 @@
-%h1.page-header= t('tournaments-list')
+%h1= t('tournaments-list')
+
+%ul.nav.nav-tabs.nav-justified
+  %li{class: ('active' if @mode == :upcoming)}(role="presentation")
+    = link_to t('.upcoming'), tournaments_path(mode: :upcoming)
+  %li{class: ('active' unless @mode == :upcoming)}(role="presentation")
+    = link_to t('.finished'), tournaments_path(mode: :finished)
+
 - @tournaments.each do |t|
   %p
     %h4
       = t.name
-      - unless current_player.try(:admin?) || DateTime.now > t.start_date
+      - unless current_player.try(:admin?) || @mode != :upcoming
         %small
-          (
-          - if player_signed_in? && current_player.tournament_ids.include?(t.id)
-            = link_to t('.unregister'), unregister_tournament_path(id: t.id), method: :post
-          - else
-            = link_to t('.register'), register_tournament_path(id: t.id), method: :post
-          )
+          = surround "[", "]" do
+            - if player_signed_in? && current_player.tournament_ids.include?(t.id)
+              = link_to t('.unregister'), unregister_tournament_path(id: t.id), method: :post
+            - else
+              = link_to t('.register'), register_tournament_path(id: t.id), method: :post
     = t.description
     =   "(" + t('begin') + "  #{l t.start_date})"
     - if t.tournament_type?
