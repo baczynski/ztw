@@ -44,3 +44,5 @@ pl:
     index:
       register: "Zarejestruj się"
       unregister: "Wyrejestruj się"
+      upcoming: "Nadchodzące turnieje"
+      finished: "Zakończone turnieje"
