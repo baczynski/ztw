@@ -13,7 +13,7 @@ class TournamentsController < ApplicationController
   def create
     @tournament = Tournament.new(tournament_params)
     if @tournament.save
-      redirect_to root_path, notice: 'Turniej został pomyślnie utworzony'
+      redirect_to root_path, notice: I18n.t('notice.tournament_created')
     else
       render :new
     end
@@ -22,17 +22,17 @@ class TournamentsController < ApplicationController
   def register
     tournament = Tournament.find(params[:id])
     if current_player.admin?
-      redirect_to root_path, notice: 'Nie możesz zarejestrować się na turniej!'
+      redirect_to root_path, notice: I18n.t('notice.registration_denied')
     else
       tournament.players << current_player
-      redirect_to root_path, notice: 'Zostałeś zarejestrowany na turniej'
+      redirect_to root_path, notice: I18n.t('notice.registered')
     end
   end
 
   def unregister
     tournament = Tournament.find(params[:id])
     tournament.players.delete(current_player)
-    redirect_to root_path, notice: 'Zostałeś wyrejestrowany z turnieju'
+    redirect_to root_path, notice: I18n.t('notice.unregistered')
   end
 
 private

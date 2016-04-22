@@ -18,8 +18,14 @@ pl:
   tournaments-list: "Lista turniejów"
 
   will_paginate:
-    next_label: "Dalej"
-    previous_label: "Wstecz"
+    next_label: "Dalej &rarr;"
+    previous_label: "&larr; Wstecz"
+
+  notice:
+    registered: "Zostałeś zarejestrowany na turniej"
+    unregistered: "Zostałeś wyrejestrowany z turnieju"
+    registration_denied: "Nie możesz zarejestrować się na turniej!"
+    tournament_created: "Turniej został pomyślnie utworzony!"
 
   time:
     formats:
@@ -33,3 +39,8 @@ pl:
         start_date: "Data rozpoczęcia"
         tournament_type: "Typ turnieju"
         rounds: "Liczba rund"
+
+  tournaments:
+    index:
+      register: "Zarejestruj się"
+      unregister: "Wyrejestruj się"

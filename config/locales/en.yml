@@ -29,6 +29,7 @@ en:
   login: "Log in"
   sign-up: "Sign up"
   sign_out: "Sign out"
+
   forgot-your-password: "Forgot your password?"
   password-confirmation: "Password confirmation"
   characters-minimum: "characters minimum"
@@ -37,6 +38,12 @@ en:
   begin: "begin"
   tournament-t: "type"
   tournaments-list: "List of tournaments"
+
+  notice:
+    registered: "You have been registered"
+    unregistered: "You have been unregistered"
+    registration_denied: "You can't participate in a tournament!"
+    tournament_created: "Tournament has been successfully created!"
 
   time:
     formats:
@@ -50,3 +57,8 @@ en:
         start_date: "Start date"
         tournament_type: "Tournament type"
         rounds: "Rounds number"
+
+  tournaments:
+    index:
+      register: "Register"
+      unregister: "Unregister"
