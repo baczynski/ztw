@@ -5,3 +5,10 @@
 #panel-center{
   position: relative;
 }
+
+#accordion {
+  margin-top: 20px;
+  .panel-title {
+    vertical-align: middle;
+  }
+}

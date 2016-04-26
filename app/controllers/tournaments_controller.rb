@@ -14,7 +14,6 @@ class TournamentsController < ApplicationController
 
   def new
     @tournament = Tournament.new
-    @tournament.address.build
   end
 
   def create

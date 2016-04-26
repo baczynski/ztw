@@ -18,12 +18,12 @@ unless Tournament.count > 0
     tournament_type: 'ONSITE',
     rounds: 3
 
-  dates = (1..24).map {|i| DateTime.new 2015, 1, i, 13}
-  dates.shuffle!
-
   r = Random.new
 
-  tournaments = (1..24).map do |i|
+  dates = (1..50).map {|i| DateTime.now + (r.rand(2) % 2 == 0 ? i : -i)}
+  dates.shuffle!
+
+  tournaments = (1..50).map do |i|
     { name: "Turniej #{i}",
       description: "Zapraszamy na #{i}. turniej!",
       start_date: dates[i - 1],

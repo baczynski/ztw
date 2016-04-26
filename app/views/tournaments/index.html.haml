@@ -6,20 +6,30 @@
   %li{class: ('active' unless @mode == :upcoming)}(role="presentation")
     = link_to t('.finished'), tournaments_path(mode: :finished)
 
-- @tournaments.each do |t|
-  %p
-    %h4
-      = t.name
-      - unless current_player.try(:admin?) || @mode != :upcoming
-        %small
-          = surround "[", "]" do
-            - if player_signed_in? && current_player.tournament_ids.include?(t.id)
-              = link_to t('.unregister'), unregister_tournament_path(id: t.id), method: :post
-            - else
-              = link_to t('.register'), register_tournament_path(id: t.id), method: :post
-    = t.description
-    =   "(" + t('begin') + "  #{l t.start_date})"
-    - if t.tournament_type?
-      = "[" + t('tournament-t') + " #{t.tournament_type}]"
+.panel-group#accordion(role="tablist" aria-multiselectable="true")
+  - @tournaments.each do |t|
+    .panel.panel-default
+      .panel-heading.clearfix(role="tab" data-toggle="collapse" data-parent="#accordion" aria-expanded="true"){id: "heading_#{t.id}", 'aria-controls': "collapse_#{t.id}", 'data-target': "\#collapse_#{t.id}"}
+        %span.h4.panel-title
+          = t.name
+          %small= l t.start_date, format: :short
+        - unless current_player.try(:admin?) || @mode != :upcoming
+          - if player_signed_in? && current_player.tournament_ids.include?(t.id)
+            = link_to t('.unregister'), unregister_tournament_path(id: t.id), method: :post, 'class': 'btn btn-sm btn-warning pull-right'
+          - else
+            = link_to t('.register'), register_tournament_path(id: t.id), method: :post, 'class': 'btn btn-sm btn-info pull-right'
+      .panel-collapse.collapse(role="tabpanel"){id: "collapse_#{t.id}", 'aria-labelledby': "heading_#{t.id}"}
+        .panel-body
+          %p
+            %strong
+              = succeed ':' do
+                = Tournament.human_attribute_name(:start_date)
+            = l t.start_date
+          %p
+            %strong
+              = succeed ':' do
+                = Tournament.human_attribute_name(:tournament_type)
+            = Tournament::TOURNAMENT_TYPE[t.tournament_type]
+          %h5= t.description
 
 = will_paginate @tournaments
