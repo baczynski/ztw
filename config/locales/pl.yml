@@ -26,6 +26,7 @@ pl:
   time:
     formats:
       default: "%a, %d %b %Y %H:%M"
+      short: "%d %B %H:%M"
 
   activerecord:
     attributes:
