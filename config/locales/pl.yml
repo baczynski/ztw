@@ -1,16 +1,12 @@
 pl:
   access_denied: "Dostęp wzbroniony!"
 
-  remember-me: "Pamiętaj mnie"
-  password: "Hasło"
-  sign-in: "Zaloguj się"
-  email: "Email"
-  login: "Logowanie"
-  sign-up: "Zarejestruj się"
+  sign_in: &sign_in "Zaloguj się"
+  log_in: &log_in "Logowanie"
+  sign_up: &sign_up "Zarejestruj się"
   sign_out: "Wyloguj się"
+
   forgot-your-password: "Zapomniałeś hasła?"
-  password-confirmation: "Potwierdź hasło"
-  characters-minimum: "znaków minimum"
   send-me-reset-password-instructions: "Wyślij mi instrukcję przywrócenia hasła."
   add-new-tournament: "Utwórz turniej"
   begin: "od"
@@ -39,6 +35,11 @@ pl:
         start_date: "Data rozpoczęcia"
         tournament_type: "Typ turnieju"
         rounds: "Liczba rund"
+      player:
+        email: "Email"
+        password: "Hasło"
+        password_confirmation: "Potwierdź hasło"
+        remember_me: "Pamiętaj mnie"
 
   tournaments:
     index:
@@ -46,3 +47,13 @@ pl:
       unregister: "Wyrejestruj się"
       upcoming: "Nadchodzące turnieje"
       finished: "Zakończone turnieje"
+
+  devise:
+    registrations:
+      new:
+        sign_up: *sign_up
+        chars_min: "%{min} znaków minimum"
+    sessions:
+      new:
+        log_in: *log_in
+        sign_in: *sign_in
