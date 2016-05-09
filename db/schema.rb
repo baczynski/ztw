@@ -11,13 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160426130840) do
+ActiveRecord::Schema.define(version: 20160509190629) do
 
   create_table "addresses", force: :cascade do |t|
-    t.string "city"
-    t.string "zip_code"
-    t.string "street_address"
+    t.string  "city"
+    t.string  "zip_code"
+    t.string  "street_address"
+    t.integer "addressable_id"
+    t.string  "addressable_type"
   end
+
+  add_index "addresses", ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
 
   create_table "matches", force: :cascade do |t|
     t.integer  "white_player_id"
@@ -43,13 +47,11 @@ ActiveRecord::Schema.define(version: 20160426130840) do
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
     t.boolean  "admin",                  default: false
-    t.integer  "address_id"
     t.string   "first_name"
     t.string   "surname"
     t.date     "date_of_birth"
   end
 
-  add_index "players", ["address_id"], name: "index_players_on_address_id"
   add_index "players", ["email"], name: "index_players_on_email", unique: true
   add_index "players", ["reset_password_token"], name: "index_players_on_reset_password_token", unique: true
 

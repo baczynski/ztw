@@ -5,5 +5,9 @@ class Player < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_and_belongs_to_many :tournaments
-  belongs_to :address
+  has_one :address, as: :addressable
+
+  accepts_nested_attributes_for :address
+
+  validates :password_confirmation, presence: :true
 end
