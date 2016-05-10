@@ -1,0 +1,11 @@
+= f.email_field :email, autofocus: true
+- if new_player
+  = f.password_field :password, autocomplete: "off", help: (t('.chars_min', min: @minimum_password_length) if @minimum_password_length)
+  = f.password_field :password_confirmation, autocomplete: "off"
+= f.text_field :first_name
+= f.text_field :surname
+= f.date_field :date_of_birth, autocomplete: 'off'
+= f.fields_for :address do |a|
+  = a.text_field :city
+  = a.text_field :zip_code
+  = a.text_field :street_address

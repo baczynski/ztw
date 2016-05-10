@@ -5,9 +5,8 @@ pl:
   log_in: &log_in "Logowanie"
   sign_up: &sign_up "Zarejestruj się"
   sign_out: "Wyloguj się"
+  edit_player: "Edytuj dane osobowe"
 
-  forgot-your-password: "Zapomniałeś hasła?"
-  send-me-reset-password-instructions: "Wyślij mi instrukcję przywrócenia hasła."
   add-new-tournament: "Utwórz turniej"
   begin: "od"
   tournament-t: "turniej typu"
@@ -41,6 +40,13 @@ pl:
         password: "Hasło"
         password_confirmation: "Potwierdź hasło"
         remember_me: "Pamiętaj mnie"
+        first_name: "Imię"
+        surname: "Nazwisko"
+        date_of_birth: "Data urodzenia"
+      address:
+        city: "Miasto"
+        zip_code: "Kod pocztowy"
+        street_address: "Ulica, nr domu"
 
   tournaments:
     index:
@@ -53,6 +59,11 @@ pl:
     registrations:
       new:
         sign_up: *sign_up
+      edit:
+        update: "Zapisz"
+        delete: "Usuń konto"
+        confirm: "Jesteś pewien?"
+      form:
         chars_min: "%{min} znaków minimum"
     sessions:
       new:
