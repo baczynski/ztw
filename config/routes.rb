@@ -4,14 +4,17 @@ Rails.application.routes.draw do
 
     devise_for :players, controllers: {registrations: 'registrations'}
     root to: 'tournaments#index'
-    resources :tournaments, only: [:index, :new, :create] do
+    resources :tournaments, only: [:index, :new, :create,:details,:edit_match] do
       member do
         post 'register'
         post 'unregister'
+        post 'details'
+        post 'edit_match'
+        post 'next_round'
       end
     end
-
   end
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -71,6 +71,7 @@ en:
       unregister: "Unregister"
       upcoming: "Upcoming tournaments"
       finished: "Past tournaments"
+      details: "Details"
 
   devise:
     registrations:

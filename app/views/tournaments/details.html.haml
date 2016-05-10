@@ -1,0 +1,40 @@
+%h1
+  = t('.tournament_result')
+  %small= Tournament.human_attribute_name(:round) + ": " + @tournament[:round].to_s
+
+- if @found_without_result
+  .alert{ :class => "alert-#{t('.found_without_result')}" }
+    %button.close{ :data => { :dismiss => "alert" } } x
+    %strong
+      = t('.found_without_result')
+%div
+  - if @tournament[:round].eql?(0)
+    =link_to t('.first_round'), next_round_tournament_path(tournament_id: @tournament.id,round: @tournament.round), method: :post, 'class': 'btn btn-sm btn-warning',remote: true
+  - else
+    =link_to t('.next_round'), next_round_tournament_path(tournament_id: @tournament.id,round: @tournament.round), method: :post, 'class': 'btn btn-sm btn-warning',remote: true
+.panel-group#accordion(role="tablist" aria-multiselectable="true")
+  - @matches.each do |t|
+    .panel.panel-default
+      .panel-heading.clearfix(role="tab" data-toggle="collapse" data-parent="#accordion" aria-expanded="true"){id: "heading_#{t.id}", 'aria-controls': "collapse_#{t.id}", 'data-target': "\#collapse_#{t.id}"}
+        %span.h4.panel-title.pull-left
+          = Player.find(t.white_player_id).email
+        %span.h4.panel-title.pull-right
+          = Player.find(t.black_player_id).email
+      .panel-collapse.collapse(role="tabpanel"){id: "collapse_#{t.id}", 'aria-labelledby': "heading_#{t.id}"}
+        .panel-body
+          %h5.pull-left= t('.white')
+          %h5.pull-right=t('.black')
+
+
+          %div.text-center
+            = link_to t('.white_won'),edit_match_tournament_path(id: t.id,winner: 'WHITE'), method: :post,'class': 'btn btn-primary match_result',remote: true
+            = link_to t('.black_won'), edit_match_tournament_path(id: t.id,winner: 'BLACK'), method: :post, 'class': 'btn btn-primary match_result',remote: true
+            = link_to t('.draw'),edit_match_tournament_path(id: t.id,winner: 'DRAW'), method: :post,'class': 'btn btn-primary match_result',remote: true
+            = link_to t('.no_result'),edit_match_tournament_path(id: t.id,winner: 'NO-RESULT'), method: :post,'class': 'btn btn-primary match_result',remote: true
+
+          - if t.result.eql?('WHITE')
+            %div.text-center.h4= t('.winner') + t('.white')
+          - elsif t.result.eql?('BLACK')
+            %div.text-center.h4= t('.winner') + t('.black')
+          - elsif t.result.eql?('DRAW')
+            %div.text-center.h4= t('.winner') + t('.draw')

@@ -35,6 +35,7 @@ pl:
         start_date: "Data rozpoczęcia"
         tournament_type: "Typ turnieju"
         rounds: "Liczba rund"
+        round: "Runda"
       player:
         email: "Email"
         password: "Hasło"
@@ -54,6 +55,21 @@ pl:
       unregister: "Wyrejestruj się"
       upcoming: "Nadchodzące turnieje"
       finished: "Zakończone turnieje"
+      details: "Szczegóły"
+    details:
+      first_round: "Pierwsza runda"
+      next_round: "Następna runda"
+      tournament_result: "Wyniki turnieju"
+      white: "Białe"
+      black: "Czarne"
+      result: "Wynik"
+      white_won: "Biały wygrał"
+      black_won: "Czarny wygrał"
+      draw: "Remis"
+      no_result: "Brak wyniku"
+      winner: "Zwycięzca: "
+      found_without_result: "Nie wypełniono wszystkich wyników"
+      round: "Runda"
 
   devise:
     registrations:

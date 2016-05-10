@@ -28,7 +28,8 @@ unless Tournament.count > 0
       description: "Zapraszamy na #{i}. turniej!",
       start_date: dates[i - 1],
       tournament_type: r.rand(2) % 2 == 0 ? 'ONSITE' : 'ONLINE',
-      rounds: r.rand(5) + 1
+      rounds: r.rand(5) + 1,
+      round: 1
     }
   end
 
