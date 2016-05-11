@@ -13,3 +13,14 @@ jQuery ->
     element.style.backgroundColor = backgroundColor
     if textColor?
       element.style.color = textColor
+
+  $('a[data-remote]').on 'ajax:success', (e, data, status, xhr) ->
+    res = data['result']
+    # alert res
+    if res?
+      winner = $('#captions').data('winner')
+      result = $('#captions').data(res.toLowerCase())
+      $('#result').text(winner + result)
+      $('#result').show()
+    else
+      $('#result').hide()

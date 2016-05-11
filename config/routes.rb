@@ -4,11 +4,11 @@ Rails.application.routes.draw do
 
     devise_for :players, controllers: {registrations: 'registrations'}
     root to: 'tournaments#index'
-    resources :tournaments, only: [:index, :new, :create,:details,:edit_match] do
+    resources :tournaments, only: [:index, :new, :create] do
       member do
         post 'register'
         post 'unregister'
-        post 'details'
+        get 'details'
         post 'edit_match'
         post 'next_round'
       end

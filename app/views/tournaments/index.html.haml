@@ -18,7 +18,7 @@
             = link_to t('.unregister'), unregister_tournament_path(id: t.id), method: :post, 'class': 'btn btn-sm btn-warning pull-right'
           - else
             = link_to t('.register'), register_tournament_path(id: t.id), method: :post, 'class': 'btn btn-sm btn-info pull-right'
-        = link_to t('.details'), details_tournament_path(id: t.id,round: t.round),method: :post, 'class': 'btn btn-sm btn-info pull-right'
+        = link_to t('.details'), details_tournament_path(id: t.id,round: t.round), 'class': 'btn btn-sm btn-info pull-right'
       .panel-collapse.collapse(role="tabpanel"){id: "collapse_#{t.id}", 'aria-labelledby': "heading_#{t.id}"}
         .panel-body
           %p

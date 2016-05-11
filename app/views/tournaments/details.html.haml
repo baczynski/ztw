@@ -22,8 +22,8 @@
           = Player.find(t.black_player_id).email
       .panel-collapse.collapse(role="tabpanel"){id: "collapse_#{t.id}", 'aria-labelledby': "heading_#{t.id}"}
         .panel-body
-          %h5.pull-left= t('.white')
-          %h5.pull-right=t('.black')
+          %span.h5.pull-left= t('.white')
+          %span.h5.pull-right=t('.black')
 
 
           %div.text-center
@@ -32,9 +32,12 @@
             = link_to t('.draw'),edit_match_tournament_path(id: t.id,winner: 'DRAW'), method: :post,'class': 'btn btn-primary match_result',remote: true
             = link_to t('.no_result'),edit_match_tournament_path(id: t.id,winner: 'NO-RESULT'), method: :post,'class': 'btn btn-primary match_result',remote: true
 
-          - if t.result.eql?('WHITE')
-            %div.text-center.h4= t('.winner') + t('.white')
-          - elsif t.result.eql?('BLACK')
-            %div.text-center.h4= t('.winner') + t('.black')
-          - elsif t.result.eql?('DRAW')
-            %div.text-center.h4= t('.winner') + t('.draw')
+          #captions.hidden{'data-winner': t('.winner'), 'data-white': t('.white'), 'data-black': t('.black'), 'data-draw': t('.draw')}
+
+          %div#result.text-center.h4
+            - if t.result.eql?('WHITE')
+              = t('.winner') + t('.white')
+            - elsif t.result.eql?('BLACK')
+              = t('.winner') + t('.black')
+            - elsif t.result.eql?('DRAW')
+              = t('.winner') + t('.draw')

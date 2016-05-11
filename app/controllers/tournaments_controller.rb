@@ -48,12 +48,11 @@ class TournamentsController < ApplicationController
 
   def edit_match
     @match = Match.match(params[:id]);
-    if params[:winner].eql?('NO-RESULT')
-      @match.result = nil
-      @match.save
-    else
-      @match.result = params[:winner]
-      @match.save
+    res = params[:winner].eql?('NO-RESULT') ? nil : params[:winner]
+    @match.result = res
+    @match.save
+    respond_to do |format|
+      format.json { render json: {result: res} }
     end
   end
 
