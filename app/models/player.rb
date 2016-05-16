@@ -13,6 +13,14 @@ class Player < ActiveRecord::Base
 
   after_initialize :check_address
 
+  def full_name
+    (first_name.blank? ? '' : first_name + ' ') + surname.to_s
+  end
+
+  def has_address?
+    !!address.id
+  end
+
 private
   def check_address
     build_address unless address

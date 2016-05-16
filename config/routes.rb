@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  
+
   scope '(:locale)', locale: /pl|en/ do
 
     devise_for :players, controllers: {registrations: 'registrations'}
+    resources :players, only: [:show]
     root to: 'tournaments#index'
     resources :tournaments, only: [:index, :new, :create] do
       member do

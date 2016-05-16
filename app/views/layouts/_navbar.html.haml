@@ -17,8 +17,9 @@
             = current_player.email
             %span.caret
           %ul.dropdown-menu
-            %li= link_to t('sign_out'), destroy_player_session_path, method: :delete
+            %li= link_to t('your_profile'), player_path(current_player)
             %li= link_to t('edit_player'), edit_player_registration_path
+            %li= link_to t('sign_out'), destroy_player_session_path, method: :delete
       - else
         %li= link_to t('sign_up'), new_player_registration_path
         %li= link_to t('sign_in'), player_session_path

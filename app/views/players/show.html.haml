@@ -1,0 +1,23 @@
+%h2
+  - if @player.full_name.empty?
+    = @player.email
+  - else
+    = @player.full_name
+    %small= @player.email
+
+  - if @player.admin?
+    %small
+      = surround '[', ']' do
+        %em= Player.human_attribute_name :admin
+
+%p
+  = succeed ':' do
+    %strong= Player.human_attribute_name :date_of_birth
+  = @player.date_of_birth
+
+- if @player.has_address?
+  - [:city, :zip_code, :street_address].each do |field|
+    %p
+      = succeed ':' do
+        %strong= Address.human_attribute_name field
+      = @player.address[field]
