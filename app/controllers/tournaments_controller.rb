@@ -1,6 +1,6 @@
 class TournamentsController < ApplicationController
   before_filter :authorize_admin, only: [:new, :create]
-  before_filter :authenticate_player!, only: [:register, :unregister,:details]
+  before_filter :authenticate_player!, only: [:register, :unregister, :details]
 
   def index
     @mode = (params[:mode] || :upcoming).to_sym
@@ -43,7 +43,23 @@ class TournamentsController < ApplicationController
 
   def details
     @tournament= Tournament.find(params[:id])
-    @matches = Match.round(params[:id],@tournament[:round])
+    @round = @tournament[:round]
+    if params[:round].present?
+      @round = params[:round]
+    end
+    if @round.to_i > @tournament[:rounds]
+      @round= @round.to_i() -1
+    end
+    if params[:next_round].present? && @round.to_i < @tournament[:round]
+      if @round.to_i <@tournament[:rounds]
+        @round = (@round.to_i() +1)
+      end
+    elsif params[:previous_round].present?
+      if @round.to_i >1
+        @round = (@round.to_i() -1)
+      end
+    end
+    @matches = Match.round(params[:id], @round)
   end
 
   def edit_match
@@ -57,35 +73,51 @@ class TournamentsController < ApplicationController
   end
 
   def next_round
-    matches = Match.round(params[:tournament_id],params[:round])
+    t = Tournament.find(params[:id])
+    matches = Match.round(params[:id], t[:round])
     found_nil = false
     matches.each do |t|
       if t[:result].nil?
         found_nil = true
       end
     end
-
-=begin
-    tournament_matches= Tournament.find(params[:tournament_id]).matches
-    players_with_opponent = Array.new
-    matches_in_tournament =
-    matches_array = Array.new
-    if found_nil
-      @found_without_result=true
-    else
-      @found_without_result=false
-      t = Tournament.find(params[:tournament_id])
-      players_number = t.players.count
-      for i in 0:players_number/2
-        matches_array
-      end
+    respond_to do |format|
+      format.json { render json: {res1: found_nil} }
     end
-=end
+
+    unless found_nil
+
+
+      t[:round] = t[:round] + 1
+      t.save
+      if t[:round] <= t[:rounds]
+        tournament_players = Tournament.find(params[:id]).players
+        players_with_opponent= Array.new
+        players_number = t.players.count
+        for i in 0..((players_number/2)-1)
+          p1 = rand(0...players_number)
+          while players_with_opponent.include?(p1) do
+            p1 = rand(0...players_number)
+          end
+          players_with_opponent.append p1
+          p2 = rand(0...players_number)
+          while players_with_opponent.include?(p2) do
+            p2 = rand(0...players_number)
+          end
+
+          players_with_opponent.append p2
+          m = Match.new(white_player_id: tournament_players[p1][:id], black_player_id: tournament_players[p2][:id], round: t[:round], tournament_id: t[:id])
+          m.save
+
+        end
+      end
+
+    end
 
   end
 
 
-private
+  private
   def tournament_params
     params.require(:tournament).permit(:name, :description, :start_date, :tournament_type, :rounds)
   end

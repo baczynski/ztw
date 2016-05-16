@@ -59,6 +59,7 @@ pl:
     details:
       first_round: "Pierwsza runda"
       next_round: "Następna runda"
+      previous_round: "Poprzednia runda"
       tournament_result: "Wyniki turnieju"
       white: "Białe"
       black: "Czarne"
@@ -70,6 +71,9 @@ pl:
       winner: "Zwycięzca: "
       found_without_result: "Nie wypełniono wszystkich wyników"
       round: "Runda"
+      finish_tournament: "Zakończ turniej"
+      end: "Zakończony"
+
 
   devise:
     registrations:

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       member do
         post 'register'
         post 'unregister'
+        post 'details'
         get 'details'
         post 'edit_match'
         post 'next_round'

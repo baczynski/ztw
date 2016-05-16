@@ -16,11 +16,20 @@ jQuery ->
 
   $('a[data-remote]').on 'ajax:success', (e, data, status, xhr) ->
     res = data['result']
-    # alert res
-    if res?
-      winner = $('#captions').data('winner')
-      result = $('#captions').data(res.toLowerCase())
-      $('#result').text(winner + result)
-      $('#result').show()
+    res1 = data['res1']
+    if res1?
+      if res1
+        alert "Nie wypełniono wszystkich wyników"
+      else
+        window.location.href = window.location.href
+    else if res?
+      if res
+        winner = $('#captions').data('winner')
+        result = $('#captions').data(res.toLowerCase())
+        $('#result').text(winner + result)
+        $('#result').show()
     else
       $('#result').hide()
+
+
+

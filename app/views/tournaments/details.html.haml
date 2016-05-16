@@ -1,17 +1,24 @@
 %h1
   = t('.tournament_result')
-  %small= Tournament.human_attribute_name(:round) + ": " + @tournament[:round].to_s
-
-- if @found_without_result
-  .alert{ :class => "alert-#{t('.found_without_result')}" }
-    %button.close{ :data => { :dismiss => "alert" } } x
-    %strong
-      = t('.found_without_result')
-%div
-  - if @tournament[:round].eql?(0)
-    =link_to t('.first_round'), next_round_tournament_path(tournament_id: @tournament.id,round: @tournament.round), method: :post, 'class': 'btn btn-sm btn-warning',remote: true
+  - if @tournament[:round] <= @tournament[:rounds]
+    %small= Tournament.human_attribute_name(:round) + ": " + @tournament[:round].to_s
   - else
-    =link_to t('.next_round'), next_round_tournament_path(tournament_id: @tournament.id,round: @tournament.round), method: :post, 'class': 'btn btn-sm btn-warning',remote: true
+    %small= t('.end')
+  -if @round.present? && !current_player.admin?
+    %br
+    %small= Tournament.human_attribute_name(:round) + ": " + @round.to_s
+
+%div
+  - if player_signed_in? && current_player.admin?
+    - if @tournament[:round].eql?(0)
+      =link_to t('.first_round'), next_round_tournament_path(tournament_id: @tournament.id,round: @tournament.round), method: :post, 'class': 'btn btn-sm btn-warning',remote: true
+    - elsif @tournament[:round].eql?(@tournament[:rounds])
+      =link_to t('.finish_tournament'), next_round_tournament_path(tournament_id: @tournament.id,round: @tournament.round), method: :post, 'class': 'btn btn-sm btn-warning',remote: true
+    - elsif @tournament[:round]>0 && @tournament[:round]<@tournament[:rounds]
+      =link_to t('.next_round'), next_round_tournament_path(tournament_id: @tournament.id,round: @tournament.round), method: :post, 'class': 'btn btn-sm btn-warning',remote: true
+  - elsif player_signed_in?
+    =link_to t('.next_round'), details_tournament_path(tournament_id: @tournament.id,next_round: true,round: @round), 'class': 'btn btn-sm btn-warning'
+    =link_to t('.previous_round'), details_tournament_path(tournament_id: @tournament.id,previous_round: true,round: @round),'class': 'btn btn-sm btn-warning'
 .panel-group#accordion(role="tablist" aria-multiselectable="true")
   - @matches.each do |t|
     .panel.panel-default
@@ -25,12 +32,12 @@
           %span.h5.pull-left= t('.white')
           %span.h5.pull-right=t('.black')
 
-
-          %div.text-center
-            = link_to t('.white_won'),edit_match_tournament_path(id: t.id,winner: 'WHITE'), method: :post,'class': 'btn btn-primary match_result',remote: true
-            = link_to t('.black_won'), edit_match_tournament_path(id: t.id,winner: 'BLACK'), method: :post, 'class': 'btn btn-primary match_result',remote: true
-            = link_to t('.draw'),edit_match_tournament_path(id: t.id,winner: 'DRAW'), method: :post,'class': 'btn btn-primary match_result',remote: true
-            = link_to t('.no_result'),edit_match_tournament_path(id: t.id,winner: 'NO-RESULT'), method: :post,'class': 'btn btn-primary match_result',remote: true
+          - if player_signed_in? && current_player.admin? && @tournament[:round] <= @tournament[:rounds]
+            %div.text-center
+              = link_to t('.white_won'),edit_match_tournament_path(id: t.id,winner: 'WHITE'), method: :post,'class': 'btn btn-primary match_result',remote: true
+              = link_to t('.black_won'), edit_match_tournament_path(id: t.id,winner: 'BLACK'), method: :post, 'class': 'btn btn-primary match_result',remote: true
+              = link_to t('.draw'),edit_match_tournament_path(id: t.id,winner: 'DRAW'), method: :post,'class': 'btn btn-primary match_result',remote: true
+              = link_to t('.no_result'),edit_match_tournament_path(id: t.id,winner: 'NO-RESULT'), method: :post,'class': 'btn btn-primary match_result',remote: true
 
           #captions.hidden{'data-winner': t('.winner'), 'data-white': t('.white'), 'data-black': t('.black'), 'data-draw': t('.draw')}
 
