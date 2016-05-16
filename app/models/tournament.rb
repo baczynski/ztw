@@ -11,6 +11,7 @@ class Tournament < ActiveRecord::Base
   validates :tournament_type, inclusion: {in: TOURNAMENT_TYPE.keys}
   validates :name, :start_date, uniqueness: {case_sensitive: false}
   validates :rounds, numericality: {only_integer: true, greater_than: 0}
+  validates :start_date, date: {after: proc {Time.now} }
 
   self.per_page = 20
 

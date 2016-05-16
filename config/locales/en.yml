@@ -32,6 +32,7 @@ en:
   begin: "begin"
   tournament-t: "type"
   tournaments-list: "List of tournaments"
+  your_profile: "Show profile"
 
   notice:
     registered: "You have been registered"
@@ -60,6 +61,7 @@ en:
         first_name: "First name"
         surname: "Last name"
         date_of_birth: "Date of birth"
+        admin: "Administrator"
       address:
         city: "City"
         zip_code: "Zip code"

@@ -11,6 +11,7 @@ pl:
   begin: "od"
   tournament-t: "turniej typu"
   tournaments-list: "Lista turniejów"
+  your_profile: "Twój profil"
 
   will_paginate:
     next_label: "Dalej &rarr;"
@@ -44,6 +45,7 @@ pl:
         first_name: "Imię"
         surname: "Nazwisko"
         date_of_birth: "Data urodzenia"
+        admin: "Administrator"
       address:
         city: "Miasto"
         zip_code: "Kod pocztowy"

@@ -10,8 +10,17 @@ class Player < ActiveRecord::Base
   accepts_nested_attributes_for :address
 
   validates :password_confirmation, presence: true, on: :create
+  validates :date_of_birth, date: {before: proc {Time.now}}
 
   after_initialize :check_address
+
+  def full_name
+    (first_name.blank? ? '' : first_name + ' ') + surname.to_s
+  end
+
+  def has_address?
+    !!address.id
+  end
 
 private
   def check_address

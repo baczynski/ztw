@@ -8,11 +8,10 @@ jQuery ->
       format: 'YYYY/MM/DD HH:mm'
       widgetPositioning:
         vertical: 'bottom'
-      minDate: new Date()
-  window.paintIt = (element, backgroundColor, textColor) ->
-    element.style.backgroundColor = backgroundColor
-    if textColor?
-      element.style.color = textColor
+    $('.datepicker').datetimepicker
+      format: 'YYYY/MM/DD'
+      widgetPositioning:
+        vertical: 'bottom'
 
   $('a[data-remote]').on 'ajax:success', (e, data, status, xhr) ->
     res = data['result']
