@@ -34,6 +34,8 @@ gem 'turbolinks'
 # Nice Bootstrap date-time picker
 gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails'
+# Date validations
+gem 'date_validator'
 # bootstrap-select packaged for Rails
 gem 'bootstrap-select-rails'
 
