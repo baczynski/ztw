@@ -50,25 +50,17 @@ class TournamentsController < ApplicationController
     if @round.to_i > @tournament[:rounds]
       @round= @round.to_i() -1
     end
-    if params[:next_round].present? && @round.to_i < @tournament[:round]
-      if @round.to_i <@tournament[:rounds]
-        @round = (@round.to_i() +1)
-      end
-    elsif params[:previous_round].present?
-      if @round.to_i >1
-        @round = (@round.to_i() -1)
-      end
-    end
     @matches = Match.round(params[:id], @round)
   end
 
   def edit_match
     @match = Match.match(params[:id]);
     res = params[:winner].eql?('NO-RESULT') ? nil : params[:winner]
+    m = params[:id]
     @match.result = res
     @match.save
     respond_to do |format|
-      format.json { render json: {result: res} }
+      format.json { render json: {result: res,match_id: m}}
     end
   end
 
@@ -86,7 +78,6 @@ class TournamentsController < ApplicationController
     end
 
     unless found_nil
-
 
       t[:round] = t[:round] + 1
       t.save
@@ -116,6 +107,13 @@ class TournamentsController < ApplicationController
 
   end
 
+  def results
+
+    @tournament = Tournament.find(params[:id])
+    @matches= @tournament.matches
+    @players= @tournament.players
+
+  end
 
   private
   def tournament_params
