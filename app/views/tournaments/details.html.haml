@@ -4,9 +4,6 @@
     %small= Tournament.human_attribute_name(:round) + ": " + @tournament[:round].to_s
   - else
     %small= t('.end')
-  -if @round.present?
-    %br
-    %small= Tournament.human_attribute_name(:round) + ": " + @round.to_s
 
 %div
   - if player_signed_in? && current_player.admin?
@@ -19,7 +16,7 @@
 
 %ul.nav.nav-tabs
   - (1..@tournament.rounds).each do |i|
-    %li
+    %li(role="presentation"){:class => ('active' if i == @round)}
       =link_to i, details_tournament_path(tournament_id: @tournament.id,change_round: true,round: i)
 .panel-group#accordion(role="tablist" aria-multiselectable="true")
   - @matches.each do |t|

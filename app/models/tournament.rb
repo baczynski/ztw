@@ -18,7 +18,7 @@ class Tournament < ActiveRecord::Base
   validates :rounds, numericality: {only_integer: true, greater_than: 0}
   validates :start_date, date: {after: proc {Time.now} }, on: :create
 
-  after_initialize :set_defaults
+  before_create :set_defaults
 
   self.per_page = 20
 

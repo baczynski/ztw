@@ -45,13 +45,8 @@ class TournamentsController < ApplicationController
 
   def details
     @tournament= Tournament.find(params[:id])
-    @round = @tournament[:round]
-    if params[:round].present?
-      @round = params[:round]
-    end
-    if @round.to_i > @tournament[:rounds]
-      @round= @round.to_i() -1
-    end
+    @round = params[:round].try(:to_i) || @tournament[:round]
+    @round -= 1 if @round > @tournament[:rounds]
     @matches = Match.round(params[:id], @round)
   end
 
