@@ -17,7 +17,9 @@ class TournamentsController < ApplicationController
   end
 
   def create
+    rule_params = params[:tournament].delete(:rule_params)
     @tournament = Tournament.new(tournament_params)
+    @tournament.build_rule rule_params
     if @tournament.save
       redirect_to root_path, notice: I18n.t('notice.tournament_created')
     else
@@ -27,8 +29,8 @@ class TournamentsController < ApplicationController
 
   def register
     tournament = Tournament.find(params[:id])
-    if current_player.admin?
-      redirect_to root_path, notice: I18n.t('notice.registration_denied')
+    if current_player.admin? || !tournament.check_rule_for(current_player)
+      redirect_to root_path, flash: {error: I18n.t('notice.registration_denied')}
     else
       tournament.players << current_player
       redirect_to root_path, notice: I18n.t('notice.registered')
@@ -119,6 +121,7 @@ class TournamentsController < ApplicationController
 
   private
   def tournament_params
-    params.require(:tournament).permit(:name, :description, :start_date, :tournament_type, :rounds)
+    params.require(:tournament).permit(:name, :description, :start_date, :tournament_type, :rounds,
+                                      :rule_type)
   end
 end

@@ -3,7 +3,14 @@
     = bootstrap_form_for @tournament do |f|
       = f.text_field :name
       = f.text_area :description
-      = f.text_field :start_date, icon: 'calendar', class: 'datepicker', autocomplete: 'off'
+      = f.text_field :start_date, icon: 'calendar', class: 'datetimepicker', autocomplete: 'off'
       = f.select :tournament_type, Tournament::TOURNAMENT_TYPE.invert
       = f.number_field :rounds, min: 1
+      = f.collection_select :rule_type, Tournament::RULE_TYPES, :to_s, :rule_name, include_blank: true
+      = f.fields_for :rule_params do |rule|
+        #rule_fields
+          .activity_rule(data-type="ActivityRule")
+            = rule.number_field :games_limit, label: ActivityRule.human_attribute_name(:games_limit), value: @tournament.rule.try(:games_limit)
+          .rating_rule(data-type="RatingRule")
+            = rule.number_field :min_rating, label: RatingRule.human_attribute_name(:min_rating), value: @tournament.rule.try(:min_rating)
       = f.submit t('add-new-tournament'), :class => 'btn btn-success'

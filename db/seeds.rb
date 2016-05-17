@@ -8,16 +8,6 @@
 
 unless Tournament.count > 0
 
-  Tournament.create name: "Turniej im. Bobby Fischera",
-    description: "Ten turniej jest pierwszym turniejem z serii...",
-    start_date: DateTime.new(2016, 4, 13, 12)
-
-  Tournament.create name: "Turniej rozrywkowy #42",
-    description: 'Zapraszamy na 42. turniej z edycji "Turnieje rozrywkowe"',
-    start_date: DateTime.new(2016, 4, 14, 12),
-    tournament_type: 'ONSITE',
-    rounds: 3
-
   r = Random.new
 
   dates = (1..50).map {|i| DateTime.now + (r.rand(2) % 2 == 0 ? i : -i)}
@@ -28,11 +18,27 @@ unless Tournament.count > 0
       description: "Zapraszamy na #{i}. turniej!",
       start_date: dates[i - 1],
       tournament_type: r.rand(2) % 2 == 0 ? 'ONSITE' : 'ONLINE',
-      rounds: r.rand(5) + 1,
-      round: 1
+      rounds: r.rand(5) + 1
     }
   end
 
-  Tournament.create tournaments
+  tournaments << {
+    name: "Turniej im. Bobby Fischera",
+    description: "Ten turniej jest pierwszym turniejem z serii...",
+    start_date: DateTime.new(2016, 4, 13, 12),
+    rounds: 2
+  }
+
+  tournaments << {
+    name: "Turniej rozrywkowy #42",
+    description: 'Zapraszamy na 42. turniej z edycji "Turnieje rozrywkowe"',
+    start_date: DateTime.new(2016, 4, 14, 12),
+    tournament_type: 'ONSITE',
+    rounds: 3
+  }
+
+  tournaments.each do |t|
+    Tournament.new(t).save(validate: false)
+  end
 
 end

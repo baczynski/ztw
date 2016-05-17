@@ -20,7 +20,7 @@ pl:
   notice:
     registered: "Zostałeś zarejestrowany na turniej"
     unregistered: "Zostałeś wyrejestrowany z turnieju"
-    registration_denied: "Nie możesz zarejestrować się na turniej!"
+    registration_denied: "Nie możesz wziąć udział w tym turnieju!"
     tournament_created: "Turniej został pomyślnie utworzony!"
 
   time:
@@ -37,6 +37,7 @@ pl:
         tournament_type: "Typ turnieju"
         rounds: "Liczba rund"
         round: "Runda"
+        rule_type: "Reguła"
       player:
         email: "Email"
         password: "Hasło"
@@ -46,10 +47,15 @@ pl:
         surname: "Nazwisko"
         date_of_birth: "Data urodzenia"
         admin: "Administrator"
+        age: "Wiek"
       address:
         city: "Miasto"
         zip_code: "Kod pocztowy"
         street_address: "Ulica, nr domu"
+      rating_rule:
+        min_rating: "Wymagany ranking"
+      activity_rule:
+        games_limit: "Wymagana liczba turniejów"
 
   tournaments:
     index:

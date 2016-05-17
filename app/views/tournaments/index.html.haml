@@ -13,6 +13,10 @@
         %span.h4.panel-title
           = t.name
           %small= l t.start_date, format: :short
+          - if t.rule.present?
+            %small
+              = surround '(', ')' do
+                = t.rule.desc
         - unless current_player.try(:admin?) || @mode != :upcoming
           - if player_signed_in? && current_player.tournament_ids.include?(t.id)
             = link_to t('.unregister'), unregister_tournament_path(id: t.id), method: :post, 'class': 'btn btn-sm btn-warning pull-right'

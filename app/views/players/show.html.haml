@@ -10,14 +10,7 @@
       = surround '[', ']' do
         %em= Player.human_attribute_name :admin
 
-%p
-  = succeed ':' do
-    %strong= Player.human_attribute_name :date_of_birth
-  = @player.date_of_birth
+= show_fields @player, [:age, :rating]
 
 - if @player.has_address?
-  - [:city, :zip_code, :street_address].each do |field|
-    %p
-      = succeed ':' do
-        %strong= Address.human_attribute_name field
-      = @player.address[field]
+  = show_fields @player.address, [:city, :zip_code, :street_address]

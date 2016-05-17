@@ -37,7 +37,7 @@ en:
   notice:
     registered: "You have been registered"
     unregistered: "You have been unregistered"
-    registration_denied: "You can't participate in a tournament!"
+    registration_denied: "You can't participate in this tournament!"
     tournament_created: "Tournament has been successfully created!"
 
   time:
@@ -53,6 +53,7 @@ en:
         start_date: "Start date"
         tournament_type: "Tournament type"
         rounds: "Rounds number"
+        rule_type: "Rule"
       player:
         email: "Email"
         password: "Password"
@@ -62,10 +63,15 @@ en:
         surname: "Last name"
         date_of_birth: "Date of birth"
         admin: "Administrator"
+        age: "Age"
       address:
         city: "City"
         zip_code: "Zip code"
         street_address: "Street address"
+      rating_rule:
+        min_rating: "Required rating"
+      activity_rule:
+        games_limit: "Required number of tournaments"
 
   tournaments:
     index:

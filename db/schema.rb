@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160509221506) do
+ActiveRecord::Schema.define(version: 20160516170526) do
+
+  create_table "activity_rules", force: :cascade do |t|
+    t.integer  "games_limit"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "addresses", force: :cascade do |t|
     t.string  "city"
@@ -34,22 +40,24 @@ ActiveRecord::Schema.define(version: 20160509221506) do
   end
 
   create_table "players", force: :cascade do |t|
-    t.string   "email",                  default: "",    null: false
-    t.string   "encrypted_password",     default: "",    null: false
+    t.string   "email",                   default: "",    null: false
+    t.string   "encrypted_password",      default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,     null: false
+    t.integer  "sign_in_count",           default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-    t.boolean  "admin",                  default: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.boolean  "admin",                   default: false
     t.string   "first_name"
     t.string   "surname"
     t.date     "date_of_birth"
+    t.integer  "rating",                  default: 1700
+    t.integer  "development_coefficient", default: 40
   end
 
   add_index "players", ["email"], name: "index_players_on_email", unique: true
@@ -63,6 +71,12 @@ ActiveRecord::Schema.define(version: 20160509221506) do
   add_index "players_tournaments", ["player_id"], name: "index_players_tournaments_on_player_id"
   add_index "players_tournaments", ["tournament_id"], name: "index_players_tournaments_on_tournament_id"
 
+  create_table "rating_rules", force: :cascade do |t|
+    t.integer  "min_rating"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "tournaments", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -72,6 +86,10 @@ ActiveRecord::Schema.define(version: 20160509221506) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.integer  "round"
+    t.integer  "rule_id"
+    t.string   "rule_type"
   end
+
+  add_index "tournaments", ["rule_type", "rule_id"], name: "index_tournaments_on_rule_type_and_rule_id"
 
 end
