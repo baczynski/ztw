@@ -40,6 +40,6 @@ class Tournament < ActiveRecord::Base
 
 private
   def set_defaults
-    self.round = 1
+    self.round = 0
   end
 end

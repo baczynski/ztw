@@ -64,6 +64,7 @@ pl:
       upcoming: "Nadchodzące turnieje"
       finished: "Zakończone turnieje"
       details: "Szczegóły"
+      results: "Wyniki"
     details:
       first_round: "Pierwsza runda"
       next_round: "Następna runda"
@@ -81,7 +82,9 @@ pl:
       round: "Runda"
       finish_tournament: "Zakończ turniej"
       end: "Zakończony"
-
+    results:
+      round: "Runda "
+      player: "Gracz "
 
   devise:
     registrations:

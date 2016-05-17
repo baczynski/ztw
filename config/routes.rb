@@ -13,6 +13,7 @@ Rails.application.routes.draw do
         get 'details'
         post 'edit_match'
         post 'next_round'
+        post 'results'
       end
     end
   end
