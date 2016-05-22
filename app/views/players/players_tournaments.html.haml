@@ -8,6 +8,6 @@
     - @tournaments.each do |t|
       %tr
         %td.h4
-          = t.name
+          = link_to t.name, details_tournament_path(t)
         %td
-          = t.start_date
+          = l t.start_date

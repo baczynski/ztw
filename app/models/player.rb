@@ -27,10 +27,16 @@ class Player < ActiveRecord::Base
     (first_name.blank? ? '' : first_name + ' ') + surname.to_s
   end
 
+  def to_s
+    full_name.blank? ? email : full_name
+  end
+
   def age
-    year_diff = Date.today.year - date_of_birth.year
-    year_diff -= 1 if date_of_birth.years_since(year_diff) > Date.today
-    year_diff
+    if date_of_birth.present?
+      year_diff = Date.today.year - date_of_birth.year
+      year_diff -= 1 if date_of_birth.years_since(year_diff) > Date.today
+      year_diff
+    end
   end
 
   def has_address?

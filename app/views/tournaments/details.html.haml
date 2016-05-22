@@ -1,6 +1,5 @@
 %h1
   = @tournament[:name]
-- if @tournament.players.count>1
   %h2
     - if @tournament[:round] == 0
       %small= t('.not_started')
@@ -11,16 +10,18 @@
       - else
         %small= t('.end')
 
-  %div.right
-    =link_to t('.players'), players_tournament_path(round: @tournament.round),'class': 'btn btn-sm btn-info'
-    - if player_signed_in? && current_player.admin?
-      - if @tournament[:round].eql?(0)
-        =link_to t('.first_round'), next_round_tournament_path(tournament_id: @tournament.id,round: @tournament.round), method: :post, 'class': 'btn btn-sm btn-warning',remote: true
-      - elsif @tournament[:round].eql?(@tournament[:rounds])
-        =link_to t('.finish_tournament'), next_round_tournament_path(tournament_id: @tournament.id,round: @tournament.round), method: :post, 'class': 'btn btn-sm btn-warning',remote: true
-      - elsif @tournament[:round]>0 && @tournament[:round]<@tournament[:rounds]
-        =link_to t('.next_round'), next_round_tournament_path(tournament_id: @tournament.id,round: @tournament.round), method: :post, 'class': 'btn btn-sm btn-warning',remote: true
+- if @tournament.players.count > 0
+  .row
+    .col-md-offset-9.col-md-3
+      -#%div.right
+      =link_to t('.players'), players_tournament_path(round: @tournament.round),'class': 'btn btn-sm btn-info'
+      - if player_signed_in? && current_player.admin?
+        - if @tournament[:round].eql?(@tournament[:rounds])
+          =link_to t('.finish_tournament'), next_round_tournament_path(tournament_id: @tournament.id,round: @tournament.round), method: :post, 'class': 'btn btn-sm btn-warning',remote: true
+        - elsif @tournament[:round]>0 && @tournament[:round]<@tournament[:rounds]
+          =link_to t('.next_round'), next_round_tournament_path(tournament_id: @tournament.id,round: @tournament.round), method: :post, 'class': 'btn btn-sm btn-warning',remote: true
 
+- if @tournament.round > 0
   %ul.nav.nav-tabs
     - (1..@tournament.round).each do |i|
       -if i <= @tournament.rounds
@@ -31,9 +32,9 @@
       .panel.panel-default
         .panel-heading.clearfix(role="tab" data-toggle="collapse" data-parent="#accordion" aria-expanded="true"){id: "heading_#{t.id}", 'aria-controls': "collapse_#{t.id}", 'data-target': "\#collapse_#{t.id}"}
           %span.h4.panel-title.pull-left
-            = Player.find(t.white_player_id).full_name
+            = Player.find(t.white_player_id)
           %span.h4.panel-title.pull-right
-            = Player.find(t.black_player_id).full_name
+            = Player.find(t.black_player_id)
         .panel-collapse.collapse(role="tabpanel"){id: "collapse_#{t.id}", 'aria-labelledby': "heading_#{t.id}"}
           .panel-body
             %span.h5.pull-left= t('.white')

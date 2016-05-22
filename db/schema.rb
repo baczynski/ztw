@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160516170526) do
+ActiveRecord::Schema.define(version: 20160522155542) do
 
   create_table "activity_rules", force: :cascade do |t|
     t.integer  "games_limit"
@@ -29,15 +29,21 @@ ActiveRecord::Schema.define(version: 20160516170526) do
 
   add_index "addresses", ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
 
-  create_table "datetimes", force: :cascade do |t|
-    t.integer  "day"
-    t.integer  "month"
-    t.integer  "year"
-    t.integer  "hour"
-    t.integer  "minute"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
+
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
 
   create_table "matches", force: :cascade do |t|
     t.integer  "white_player_id"
@@ -83,12 +89,6 @@ ActiveRecord::Schema.define(version: 20160516170526) do
 
   create_table "rating_rules", force: :cascade do |t|
     t.integer  "min_rating"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "results", force: :cascade do |t|
-    t.integer  "result"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

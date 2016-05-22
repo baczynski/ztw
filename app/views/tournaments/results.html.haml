@@ -10,7 +10,7 @@
       - @players.each do |pl|
         %tr
           %td.h4
-            = link_to pl.full_name, player_path(id: pl[:id])
+            = link_to pl, player_path(pl)
           - (1..@tournament[:rounds].to_i).each do |i|
             %td.h4
               - if (Match.find_by tournament_id: @tournament[:id], round: i, white_player_id: pl[:id]).present?

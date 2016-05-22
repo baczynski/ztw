@@ -63,45 +63,10 @@ class TournamentsController < ApplicationController
 
   def next_round
     t = Tournament.find(params[:id])
-    matches = Match.round(params[:id], t[:round])
-    found_nil = false
-    matches.each do |t|
-      if t[:result].nil?
-        found_nil = true
-      end
-    end
+
     respond_to do |format|
-      format.json { render json: {res1: found_nil} }
+      format.json { render json: {correct: t.next_round!} }
     end
-
-    unless found_nil
-
-      t[:round] = t[:round] + 1
-      t.save
-      if t[:round] <= t[:rounds]
-        tournament_players = Tournament.find(params[:id]).players
-        players_with_opponent= Array.new
-        players_number = t.players.count
-        for i in 0..((players_number/2)-1)
-          p1 = rand(0...players_number)
-          while players_with_opponent.include?(p1) do
-            p1 = rand(0...players_number)
-          end
-          players_with_opponent.append p1
-          p2 = rand(0...players_number)
-          while players_with_opponent.include?(p2) do
-            p2 = rand(0...players_number)
-          end
-
-          players_with_opponent.append p2
-          m = Match.new(white_player_id: tournament_players[p1][:id], black_player_id: tournament_players[p2][:id], round: t[:round], tournament_id: t[:id])
-          m.save
-
-        end
-      end
-
-    end
-
   end
 
   def players

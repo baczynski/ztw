@@ -10,7 +10,7 @@
     - @players.each do |p|
       %tr
         %td.h4
-          = link_to p.full_name,player_path(id: p[:id])
+          = link_to p, player_path(p)
         %td
           = p.email
         %td
