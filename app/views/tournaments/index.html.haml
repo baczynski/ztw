@@ -20,7 +20,7 @@
         - unless current_player.try(:admin?) || @mode != :upcoming
           - if player_signed_in? && current_player.tournament_ids.include?(t.id) && t.round ==0
             = link_to t('.unregister'), unregister_tournament_path(id: t.id), method: :post, 'class': 'btn btn-sm btn-warning pull-right'
-          - elsif player_signed_in? && !current_player.tournament_ids.include?(t.id)
+          - elsif player_signed_in? && !current_player.tournament_ids.include?(t.id) && t.round ==0
             = link_to t('.register'), register_tournament_path(id: t.id), method: :post, 'class': 'btn btn-sm btn-info pull-right'
         = link_to t('.details'), details_tournament_path(id: t.id), method: :post, 'class': 'btn btn-sm btn-info pull-right'
         = link_to t('.results'), results_tournament_path(id: t.id), method: :post, 'class': 'btn btn-sm btn-info pull-right'

@@ -12,6 +12,7 @@ pl:
   tournament-t: "turniej typu"
   tournaments-list: "Lista turniejów"
   your_profile: "Twój profil"
+  my_tournaments: "Moje turnieje"
 
   will_paginate:
     next_label: "Dalej &rarr;"
@@ -82,9 +83,15 @@ pl:
       round: "Runda"
       finish_tournament: "Zakończ turniej"
       end: "Zakończony"
+      not_started: "Nie rozpoczęty"
     results:
       round: "Runda "
       player: "Gracz "
+
+  players:
+    players_tournaments:
+      tournament: "Turniej"
+      start_date: "Data rozpoczęcia"
 
   devise:
     registrations:

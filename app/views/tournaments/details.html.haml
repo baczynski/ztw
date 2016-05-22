@@ -1,11 +1,16 @@
 %h1
-  = t('.tournament_result')
-  - if @tournament[:round] <= @tournament[:rounds]
-    %small= Tournament.human_attribute_name(:round) + ": " + @tournament[:round].to_s
+  = @tournament[:name]
+%h2
+  - if @tournament[:round] == 0
+    %small= t('.not_started')
   - else
-    %small= t('.end')
+    = t('.tournament_result')
+    - if @tournament[:round] <= @tournament[:rounds]
+      %small= Tournament.human_attribute_name(:round) + ": " + @tournament[:round].to_s
+    - else
+      %small= t('.end')
 
-%div
+%div.right
   - if player_signed_in? && current_player.admin?
     - if @tournament[:round].eql?(0)
       =link_to t('.first_round'), next_round_tournament_path(tournament_id: @tournament.id,round: @tournament.round), method: :post, 'class': 'btn btn-sm btn-warning',remote: true
@@ -15,9 +20,10 @@
       =link_to t('.next_round'), next_round_tournament_path(tournament_id: @tournament.id,round: @tournament.round), method: :post, 'class': 'btn btn-sm btn-warning',remote: true
 
 %ul.nav.nav-tabs
-  - (1..@tournament.rounds).each do |i|
-    %li(role="presentation"){:class => ('active' if i == @round)}
-      =link_to i, details_tournament_path(tournament_id: @tournament.id,change_round: true,round: i)
+  - (1..@tournament.round).each do |i|
+    -if i <= @tournament.rounds
+      %li(role="presentation"){:class => ('active' if i == @round)}
+        =link_to i, details_tournament_path(tournament_id: @tournament.id,change_round: true,round: i)
 .panel-group#accordion(role="tablist" aria-multiselectable="true")
   - @matches.each do |t|
     .panel.panel-default

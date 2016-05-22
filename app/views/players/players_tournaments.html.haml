@@ -2,8 +2,12 @@
   %tr
     %th.span1
       = t('.tournament')
+    %th
+      = t('.start_date')
   %tbody
-    - @tournaments.each do |pl|
+    - @tournaments.each do |t|
       %tr
         %td.h4
-          = pl.name
+          = t.name
+        %td
+          = t.start_date
