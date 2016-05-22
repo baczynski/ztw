@@ -13,7 +13,6 @@
 - if @tournament.players.count > 0
   .row
     .col-md-offset-9.col-md-3
-      -#%div.right
       =link_to t('.players'), players_tournament_path(round: @tournament.round),'class': 'btn btn-sm btn-info'
       - if player_signed_in? && current_player.admin?
         - if @tournament[:round].eql?(@tournament[:rounds])
@@ -31,28 +30,7 @@
     - @matches.each do |t|
       .panel.panel-default
         .panel-heading.clearfix(role="tab" data-toggle="collapse" data-parent="#accordion" aria-expanded="true"){id: "heading_#{t.id}", 'aria-controls': "collapse_#{t.id}", 'data-target': "\#collapse_#{t.id}"}
-          %span.h4.panel-title.pull-left
-            = Player.find(t.white_player_id)
-          %span.h4.panel-title.pull-right
-            = Player.find(t.black_player_id)
+          = render 'match_heading', match: t
         .panel-collapse.collapse(role="tabpanel"){id: "collapse_#{t.id}", 'aria-labelledby': "heading_#{t.id}"}
           .panel-body
-            %span.h5.pull-left= t('.white')
-            %span.h5.pull-right=t('.black')
-
-            - if player_signed_in? && current_player.admin? && @tournament[:round] <= @tournament[:rounds] && t[:round].to_i == @tournament[:round]
-              %div.text-center
-                = link_to t('.white_won'),edit_match_tournament_path(id: t.id,winner: 'WHITE'), method: :post,'class': 'btn btn-primary match_result',remote: true
-                = link_to t('.black_won'), edit_match_tournament_path(id: t.id,winner: 'BLACK'), method: :post, 'class': 'btn btn-primary match_result',remote: true
-                = link_to t('.draw'),edit_match_tournament_path(id: t.id,winner: 'DRAW'), method: :post,'class': 'btn btn-primary match_result',remote: true
-                = link_to t('.no_result'),edit_match_tournament_path(id: t.id,winner: 'NO-RESULT'), method: :post,'class': 'btn btn-primary match_result',remote: true
-
-            #captions.hidden{:id => t.id,'data-winner': t('.winner'), 'data-white': t('.white'), 'data-black': t('.black'), 'data-draw': t('.draw')}
-
-            %div#result.text-center.h4{:id => t.id}
-              - if t.result.eql?('WHITE')
-                = t('.winner') + t('.white')
-              - elsif t.result.eql?('BLACK')
-                = t('.winner') + t('.black')
-              - elsif t.result.eql?('DRAW')
-                = t('.winner') + t('.draw')
+            = render 'match_body', match: t

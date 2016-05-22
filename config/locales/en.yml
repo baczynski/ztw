@@ -83,10 +83,13 @@ en:
       details: "Details"
       results: "Results"
     details:
-      first_round: "First round"
       next_round: "Next round"
-      previous_round: "Previous round"
       tournament_result: "Results of the tournament"
+      finish_tournament: "Finish tournament"
+      end: "Ended"
+      not_started: "Not started"
+      players: "Participants"
+    match_body:
       white: "White"
       black: "Black"
       result: "Result"
@@ -96,11 +99,6 @@ en:
       no_result: "No result"
       winner: "Winner: "
       found_without_result: "There is a match without result"
-      round: "Round"
-      finish_tournament: "Finish tournament"
-      end: "Ended"
-      not_started: "Not started"
-      players: "Participants"
     results:
       round: "Round "
       player: "Player "

@@ -1,0 +1,22 @@
+%span.h4.panel-title.pull-left
+  = Player.find(match.white_player_id)
+  - if match.white_rating_change.present?
+    - if match.white_rating_change >= 0
+      %span.win
+        = precede '+' do
+          = match.white_rating_change
+    - else
+      %span.loss
+        = precede '-' do
+          = match.white_rating_change.abs
+%span.h4.panel-title.pull-right
+  - if match.black_rating_change.present?
+    - if match.black_rating_change >= 0
+      %span.win
+        = precede '+' do
+          = match.black_rating_change
+    - else
+      %span.loss
+        = precede '-' do
+          = match.black_rating_change.abs
+  = Player.find(match.black_player_id)

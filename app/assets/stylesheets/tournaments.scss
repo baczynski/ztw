@@ -21,8 +21,10 @@
   display: none;
 }
 
-.right {
-  position: absolute;
-  right: 0px;
-  width: 300px;
+.win {
+  color: $brand-success;
+}
+
+.loss {
+  color: $brand-danger;
 }

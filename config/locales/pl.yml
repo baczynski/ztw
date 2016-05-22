@@ -68,10 +68,13 @@ pl:
       details: "Szczegóły"
       results: "Wyniki"
     details:
-      first_round: "Pierwsza runda"
       next_round: "Następna runda"
-      previous_round: "Poprzednia runda"
       tournament_result: "Wyniki turnieju"
+      finish_tournament: "Zakończ turniej"
+      end: "Zakończony"
+      not_started: "Nie rozpoczęty"
+      players: "Zawodnicy"
+    match_body:
       white: "Białe"
       black: "Czarne"
       result: "Wynik"
@@ -81,11 +84,6 @@ pl:
       no_result: "Brak wyniku"
       winner: "Zwycięzca: "
       found_without_result: "Nie wypełniono wszystkich wyników"
-      round: "Runda"
-      finish_tournament: "Zakończ turniej"
-      end: "Zakończony"
-      not_started: "Nie rozpoczęty"
-      players: "Zawodnicy"
     results:
       round: "Runda "
       player: "Gracz "

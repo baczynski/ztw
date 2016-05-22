@@ -1,0 +1,19 @@
+%span.h5.pull-left= t('.white')
+%span.h5.pull-right=t('.black')
+
+- if player_signed_in? && current_player.admin? && @tournament[:round] <= @tournament[:rounds] && match[:round].to_i == @tournament[:round]
+  %div.text-center
+    = link_to t('.white_won'),edit_match_tournament_path(id: match.id,winner: 'WHITE'), method: :post,'class': 'btn btn-primary match_result',remote: true
+    = link_to t('.black_won'), edit_match_tournament_path(id: match.id,winner: 'BLACK'), method: :post, 'class': 'btn btn-primary match_result',remote: true
+    = link_to t('.draw'),edit_match_tournament_path(id: match.id,winner: 'DRAW'), method: :post,'class': 'btn btn-primary match_result',remote: true
+    = link_to t('.no_result'),edit_match_tournament_path(id: match.id,winner: 'NO-RESULT'), method: :post,'class': 'btn btn-primary match_result',remote: true
+
+#captions.hidden{:id => match.id,'data-winner': t('.winner'), 'data-white': t('.white'), 'data-black': t('.black'), 'data-draw': t('.draw')}
+
+%div#result.text-center.h4{:id => match.id}
+  - if match.result.eql?('WHITE')
+    = t('.winner') + t('.white')
+  - elsif match.result.eql?('BLACK')
+    = t('.winner') + t('.black')
+  - elsif match.result.eql?('DRAW')
+    = t('.winner') + t('.draw')

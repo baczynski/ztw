@@ -47,6 +47,8 @@ class Tournament < ActiveRecord::Base
     ms = matches.where(round: self.round)
     return false if ms.all.any? {|m| m.result.blank?}
 
+    ms.each &:update_result!
+
     self.round += 1
     if round <= rounds
       players_with_opponent = []
