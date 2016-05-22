@@ -6,7 +6,11 @@ module Rule
   end
 
   def initialize(attributes={}, options={})
-    attributes = attributes.permit *permitted_params
+    if attributes.class == Hash
+      attributes.slice! *permitted_params
+    else
+      attributes = attributes.permit *permitted_params
+    end
     super
   end
   

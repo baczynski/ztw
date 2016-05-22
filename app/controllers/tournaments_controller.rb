@@ -5,7 +5,8 @@ class TournamentsController < ApplicationController
   def index
     @mode = (params[:mode] || :upcoming).to_sym
     @mode = :upcoming unless @mode.in? [:upcoming, :started, :finished]
-    @tournaments = Tournament.try(@mode).order(start_date: :desc).page(params[:page])
+    order = @mode == :upcoming ? :asc : :desc
+    @tournaments = Tournament.try(@mode).order(start_date: order).page(params[:page])
   end
 
   def new

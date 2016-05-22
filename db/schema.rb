@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160522185120) do
+ActiveRecord::Schema.define(version: 20160522213036) do
 
   create_table "activity_rules", force: :cascade do |t|
     t.integer  "games_limit"
@@ -55,6 +55,8 @@ ActiveRecord::Schema.define(version: 20160522185120) do
     t.datetime "updated_at",          null: false
     t.integer  "white_rating_change"
     t.integer  "black_rating_change"
+    t.integer  "white_rating_before"
+    t.integer  "black_rating_before"
   end
 
   create_table "players", force: :cascade do |t|

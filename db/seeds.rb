@@ -5,40 +5,64 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+ActiveRecord::Base.transaction do
+  Tournament.delete_all
 
-unless Tournament.count > 0
+  Player.where.not(admin: true).delete_all
+  abc = Player.create(
+    email: 'a@b.c', password: 'asdasdasd', password_confirmation: 'asdasdasd',
+    first_name: 'A', surname: 'B_c',
+    address: Address.create(zip_code: '123-45', city: 'Boston', street_address: '4278 Long avenue')
+  )
+  players = 10.times.map do |i|
+    { email: "player.stub#{i}@test.com", password: 'asdasdasd', password_confirmation: 'asdasdasd' }
+  end
+  Player.create players
 
   r = Random.new
 
-  dates = (1..50).map {|i| DateTime.now + (r.rand(2) % 2 == 0 ? i : -i)}
+  dates = (-5..30).map {|i| DateTime.now + i}
   dates.shuffle!
 
-  tournaments = (1..50).map do |i|
-    { name: "Turniej #{i}",
-      description: "Zapraszamy na #{i}. turniej!",
-      start_date: dates[i - 1],
+  tournaments = dates.map.with_index do |date, i|
+    Tournament.new(
+      name: "Turniej #{i + 1}",
+      description: "Zapraszamy na #{i + 1}. turniej!",
+      start_date: date,
       tournament_type: r.rand(2) % 2 == 0 ? 'ONSITE' : 'ONLINE',
-      rounds: r.rand(5) + 1
-    }
+      rounds: r.rand(4) + 1
+    )
   end
 
-  tournaments << {
-    name: "Turniej im. Bobby Fischera",
-    description: "Ten turniej jest pierwszym turniejem z serii...",
-    start_date: DateTime.new(2016, 4, 13, 12),
+  soon = Tournament.new(
+    name: "Tournament that is about to start!",
+    description: "The tournament will start in two minutes after you do 'rake db:seed'",
+    start_date: DateTime.now + 2.minutes,
+    tournament_type: 'ONLINE',
     rounds: 2
-  }
+  )
+  soon.players << Player.last(9)
+  tournaments << soon
 
-  tournaments << {
-    name: "Turniej rozrywkowy #42",
-    description: 'Zapraszamy na 42. turniej z edycji "Turnieje rozrywkowe"',
-    start_date: DateTime.new(2016, 4, 14, 12),
-    tournament_type: 'ONSITE',
-    rounds: 3
-  }
+  tournaments << Tournament.new(
+    name: "Tournament with activity rule",
+    description: "a@b.c definitely can't take part in this.",
+    start_date: DateTime.now + 1.hour,
+    tournament_type: 'ONLINE',
+    rounds: 2,
+    rule: ActivityRule.new(games_limit: 3)
+  )
+
+  tournaments << Tournament.new(
+    name: "Tournament with rating rule",
+    description: "a@b.c definitely can't take part in this.",
+    start_date: DateTime.now + 40.minutes,
+    tournament_type: 'ONLINE',
+    rounds: 2,
+    rule: RatingRule.new(min_rating: 1725)
+  )
 
   tournaments.each do |t|
-    Tournament.new(t).save(validate: false)
+    t.save(validate: false)
   end
-
 end

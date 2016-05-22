@@ -49,6 +49,9 @@ class Match < ActiveRecord::Base
     self.white_rating_change = (white_pd * white_player.coef).round
     self.black_rating_change = (black_pd * black_player.coef).round
 
+    self.white_rating_before = white_player.rating
+    self.black_rating_before = black_player.rating
+
     white_player.increment! :rating, white_rating_change
     black_player.increment! :rating, black_rating_change
 
