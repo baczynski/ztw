@@ -1,10 +1,9 @@
 %h1= t('tournaments-list')
 
 %ul.nav.nav-tabs.nav-justified
-  %li{class: ('active' if @mode == :upcoming)}(role="presentation")
-    = link_to t('.upcoming'), tournaments_path(mode: :upcoming)
-  %li{class: ('active' unless @mode == :upcoming)}(role="presentation")
-    = link_to t('.finished'), tournaments_path(mode: :finished)
+  - [:upcoming, :started, :finished].each do |m|
+    %li{class: ('active' if @mode == m)}(role="presentation")
+      = link_to t(".#{m}"), tournaments_path(mode: m)
 
 .panel-group#accordion(role="tablist" aria-multiselectable="true")
   - @tournaments.each do |t|

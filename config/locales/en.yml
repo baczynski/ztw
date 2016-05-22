@@ -78,6 +78,7 @@ en:
       register: "Register"
       unregister: "Unregister"
       upcoming: "Upcoming tournaments"
+      started: "Started tournaments"
       finished: "Past tournaments"
       details: "Details"
       results: "Results"

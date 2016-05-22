@@ -24,11 +24,15 @@ class Tournament < ActiveRecord::Base
   self.per_page = 20
 
   def self.upcoming
-    where(arel_table[:start_date].gteq(DateTime.now))
+    where(round: 0)
+  end
+
+  def self.started
+    where(arel_table[:round].gt(0).and(arel_table[:round].lteq(arel_table[:rounds])))
   end
 
   def self.finished
-    where(arel_table[:start_date].lt(DateTime.now))
+    where(arel_table[:round].gt(arel_table[:rounds]))
   end
 
   def build_rule(params)

@@ -63,6 +63,7 @@ pl:
       register: "Zarejestruj się"
       unregister: "Wyrejestruj się"
       upcoming: "Nadchodzące turnieje"
+      started: "Rozpoczęte turnieje"
       finished: "Zakończone turnieje"
       details: "Szczegóły"
       results: "Wyniki"
