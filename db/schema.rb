@@ -29,6 +29,16 @@ ActiveRecord::Schema.define(version: 20160516170526) do
 
   add_index "addresses", ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
 
+  create_table "datetimes", force: :cascade do |t|
+    t.integer  "day"
+    t.integer  "month"
+    t.integer  "year"
+    t.integer  "hour"
+    t.integer  "minute"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "matches", force: :cascade do |t|
     t.integer  "white_player_id"
     t.integer  "black_player_id"
@@ -73,6 +83,12 @@ ActiveRecord::Schema.define(version: 20160516170526) do
 
   create_table "rating_rules", force: :cascade do |t|
     t.integer  "min_rating"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "results", force: :cascade do |t|
+    t.integer  "result"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

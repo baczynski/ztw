@@ -18,6 +18,7 @@ Rails.application.routes.draw do
         post 'edit_match'
         post 'next_round'
         post 'results'
+        get 'players'
       end
     end
   end

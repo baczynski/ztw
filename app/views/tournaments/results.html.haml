@@ -1,34 +1,35 @@
-%table.table.table-striped
-  %tr
-    %th.span1
-      = t('.player')
-    - (1..@tournament[:rounds].to_i).each do |i|
-      %th.span1
-        = t('.round') + i.to_s
-  %tbody
-    - @players.each do |pl|
-      %tr
-        %td.h4
-          = pl[:email]
-        - (1..@tournament[:rounds].to_i).each do |i|
+- if @tournament.players.count >0
+  %table.table.table-striped
+    %tr
+      %th.span1.h3
+        = t('.player')
+      - (1..@tournament[:rounds].to_i).each do |i|
+        %th.span1.h3
+          = t('.round') + i.to_s
+    %tbody
+      - @players.each do |pl|
+        %tr
           %td.h4
-            - if (Match.find_by tournament_id: @tournament[:id], round: i, white_player_id: pl[:id]).present?
-              - if (Match.find_by tournament_id: @tournament[:id],  round: i, white_player_id: pl[:id])[:result].eql?('WHITE')
-                =1
-              - elsif (Match.find_by tournament_id: @tournament[:id], round: i, white_player_id: pl[:id])[:result].eql?('DRAW')
-                =0.5
-              - elsif (Match.find_by tournament_id: @tournament[:id], round: i, white_player_id: pl[:id])[:result].eql?('BLACK')
-                =0
-              - else
-                ='-'
-            - elsif (Match.find_by tournament_id: @tournament[:id], round: i, black_player_id: pl[:id]).present?
-              - if (Match.find_by tournament_id: @tournament[:id], round: i, black_player_id: pl[:id])[:result].eql?('WHITE')
-                =0
-              - elsif (Match.find_by tournament_id: @tournament[:id], round: i, black_player_id: pl[:id])[:result].eql?('DRAW')
-                =0.5
-              - elsif (Match.find_by tournament_id: @tournament[:id], round: i, black_player_id: pl[:id])[:result].eql?('BLACK')
-                =1
-              - else
-                ='-'
-            -else
-              = 1
+            = link_to pl.full_name, player_path(id: pl[:id])
+          - (1..@tournament[:rounds].to_i).each do |i|
+            %td.h4
+              - if (Match.find_by tournament_id: @tournament[:id], round: i, white_player_id: pl[:id]).present?
+                - if (Match.find_by tournament_id: @tournament[:id],  round: i, white_player_id: pl[:id])[:result].eql?('WHITE')
+                  =1
+                - elsif (Match.find_by tournament_id: @tournament[:id], round: i, white_player_id: pl[:id])[:result].eql?('DRAW')
+                  =0.5
+                - elsif (Match.find_by tournament_id: @tournament[:id], round: i, white_player_id: pl[:id])[:result].eql?('BLACK')
+                  =0
+                - else
+                  ='-'
+              - elsif (Match.find_by tournament_id: @tournament[:id], round: i, black_player_id: pl[:id]).present?
+                - if (Match.find_by tournament_id: @tournament[:id], round: i, black_player_id: pl[:id])[:result].eql?('WHITE')
+                  =0
+                - elsif (Match.find_by tournament_id: @tournament[:id], round: i, black_player_id: pl[:id])[:result].eql?('DRAW')
+                  =0.5
+                - elsif (Match.find_by tournament_id: @tournament[:id], round: i, black_player_id: pl[:id])[:result].eql?('BLACK')
+                  =1
+                - else
+                  ='-'
+              -else
+                = 1

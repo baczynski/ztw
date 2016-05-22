@@ -84,9 +84,15 @@ pl:
       finish_tournament: "Zakończ turniej"
       end: "Zakończony"
       not_started: "Nie rozpoczęty"
+      players: "Zawodnicy"
     results:
       round: "Runda "
       player: "Gracz "
+    players:
+      full_name: "Imię i nazwisko"
+      date_of_birth: "Data urodzenia"
+      email: "E-mail"
+      details: "Szczegóły"
 
   players:
     players_tournaments:

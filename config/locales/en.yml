@@ -80,6 +80,39 @@ en:
       upcoming: "Upcoming tournaments"
       finished: "Past tournaments"
       details: "Details"
+      results: "Results"
+    details:
+      first_round: "First round"
+      next_round: "Next round"
+      previous_round: "Previous round"
+      tournament_result: "Results of the tournament"
+      white: "White"
+      black: "Black"
+      result: "Result"
+      white_won: "White won"
+      black_won: "Black won"
+      draw: "Draw"
+      no_result: "No result"
+      winner: "Winner: "
+      found_without_result: "There is a match without result"
+      round: "Round"
+      finish_tournament: "Finish tournament"
+      end: "Ended"
+      not_started: "Not started"
+      players: "Participants"
+    results:
+      round: "Round "
+      player: "Player "
+    players:
+      full_name: "First name and Surname"
+      date_of_birth: "Date of birth"
+      email: "E-mail"
+      details: "Details"
+
+  players:
+    players_tournaments:
+      tournament: "Tournament"
+      start_date: "Start date"
 
   devise:
     registrations:

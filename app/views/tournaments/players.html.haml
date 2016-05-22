@@ -1,0 +1,17 @@
+%table.table.table-striped
+  %tr
+    %th.span1
+      = t('.full_name')
+    %th
+      = t('.email')
+    %th
+      = t('.date_of_birth')
+  %tbody
+    - @players.each do |p|
+      %tr
+        %td.h4
+          = link_to p.full_name,player_path(id: p[:id])
+        %td
+          = p.email
+        %td
+          = p.date_of_birth

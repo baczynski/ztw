@@ -1,55 +1,57 @@
 %h1
   = @tournament[:name]
-%h2
-  - if @tournament[:round] == 0
-    %small= t('.not_started')
-  - else
-    = t('.tournament_result')
-    - if @tournament[:round] <= @tournament[:rounds]
-      %small= Tournament.human_attribute_name(:round) + ": " + @tournament[:round].to_s
+- if @tournament.players.count>1
+  %h2
+    - if @tournament[:round] == 0
+      %small= t('.not_started')
     - else
-      %small= t('.end')
+      = t('.tournament_result')
+      - if @tournament[:round] <= @tournament[:rounds]
+        %small= Tournament.human_attribute_name(:round) + ": " + @tournament[:round].to_s
+      - else
+        %small= t('.end')
 
-%div.right
-  - if player_signed_in? && current_player.admin?
-    - if @tournament[:round].eql?(0)
-      =link_to t('.first_round'), next_round_tournament_path(tournament_id: @tournament.id,round: @tournament.round), method: :post, 'class': 'btn btn-sm btn-warning',remote: true
-    - elsif @tournament[:round].eql?(@tournament[:rounds])
-      =link_to t('.finish_tournament'), next_round_tournament_path(tournament_id: @tournament.id,round: @tournament.round), method: :post, 'class': 'btn btn-sm btn-warning',remote: true
-    - elsif @tournament[:round]>0 && @tournament[:round]<@tournament[:rounds]
-      =link_to t('.next_round'), next_round_tournament_path(tournament_id: @tournament.id,round: @tournament.round), method: :post, 'class': 'btn btn-sm btn-warning',remote: true
+  %div.right
+    =link_to t('.players'), players_tournament_path(round: @tournament.round),'class': 'btn btn-sm btn-info'
+    - if player_signed_in? && current_player.admin?
+      - if @tournament[:round].eql?(0)
+        =link_to t('.first_round'), next_round_tournament_path(tournament_id: @tournament.id,round: @tournament.round), method: :post, 'class': 'btn btn-sm btn-warning',remote: true
+      - elsif @tournament[:round].eql?(@tournament[:rounds])
+        =link_to t('.finish_tournament'), next_round_tournament_path(tournament_id: @tournament.id,round: @tournament.round), method: :post, 'class': 'btn btn-sm btn-warning',remote: true
+      - elsif @tournament[:round]>0 && @tournament[:round]<@tournament[:rounds]
+        =link_to t('.next_round'), next_round_tournament_path(tournament_id: @tournament.id,round: @tournament.round), method: :post, 'class': 'btn btn-sm btn-warning',remote: true
 
-%ul.nav.nav-tabs
-  - (1..@tournament.round).each do |i|
-    -if i <= @tournament.rounds
-      %li(role="presentation"){:class => ('active' if i == @round)}
-        =link_to i, details_tournament_path(tournament_id: @tournament.id,change_round: true,round: i)
-.panel-group#accordion(role="tablist" aria-multiselectable="true")
-  - @matches.each do |t|
-    .panel.panel-default
-      .panel-heading.clearfix(role="tab" data-toggle="collapse" data-parent="#accordion" aria-expanded="true"){id: "heading_#{t.id}", 'aria-controls': "collapse_#{t.id}", 'data-target': "\#collapse_#{t.id}"}
-        %span.h4.panel-title.pull-left
-          = Player.find(t.white_player_id).email
-        %span.h4.panel-title.pull-right
-          = Player.find(t.black_player_id).email
-      .panel-collapse.collapse(role="tabpanel"){id: "collapse_#{t.id}", 'aria-labelledby': "heading_#{t.id}"}
-        .panel-body
-          %span.h5.pull-left= t('.white')
-          %span.h5.pull-right=t('.black')
+  %ul.nav.nav-tabs
+    - (1..@tournament.round).each do |i|
+      -if i <= @tournament.rounds
+        %li(role="presentation"){:class => ('active' if i == @round)}
+          =link_to i, details_tournament_path(tournament_id: @tournament.id,change_round: true,round: i)
+  .panel-group#accordion(role="tablist" aria-multiselectable="true")
+    - @matches.each do |t|
+      .panel.panel-default
+        .panel-heading.clearfix(role="tab" data-toggle="collapse" data-parent="#accordion" aria-expanded="true"){id: "heading_#{t.id}", 'aria-controls': "collapse_#{t.id}", 'data-target': "\#collapse_#{t.id}"}
+          %span.h4.panel-title.pull-left
+            = Player.find(t.white_player_id).full_name
+          %span.h4.panel-title.pull-right
+            = Player.find(t.black_player_id).full_name
+        .panel-collapse.collapse(role="tabpanel"){id: "collapse_#{t.id}", 'aria-labelledby': "heading_#{t.id}"}
+          .panel-body
+            %span.h5.pull-left= t('.white')
+            %span.h5.pull-right=t('.black')
 
-          - if player_signed_in? && current_player.admin? && @tournament[:round] <= @tournament[:rounds] && t[:round].to_i == @tournament[:round]
-            %div.text-center
-              = link_to t('.white_won'),edit_match_tournament_path(id: t.id,winner: 'WHITE'), method: :post,'class': 'btn btn-primary match_result',remote: true
-              = link_to t('.black_won'), edit_match_tournament_path(id: t.id,winner: 'BLACK'), method: :post, 'class': 'btn btn-primary match_result',remote: true
-              = link_to t('.draw'),edit_match_tournament_path(id: t.id,winner: 'DRAW'), method: :post,'class': 'btn btn-primary match_result',remote: true
-              = link_to t('.no_result'),edit_match_tournament_path(id: t.id,winner: 'NO-RESULT'), method: :post,'class': 'btn btn-primary match_result',remote: true
+            - if player_signed_in? && current_player.admin? && @tournament[:round] <= @tournament[:rounds] && t[:round].to_i == @tournament[:round]
+              %div.text-center
+                = link_to t('.white_won'),edit_match_tournament_path(id: t.id,winner: 'WHITE'), method: :post,'class': 'btn btn-primary match_result',remote: true
+                = link_to t('.black_won'), edit_match_tournament_path(id: t.id,winner: 'BLACK'), method: :post, 'class': 'btn btn-primary match_result',remote: true
+                = link_to t('.draw'),edit_match_tournament_path(id: t.id,winner: 'DRAW'), method: :post,'class': 'btn btn-primary match_result',remote: true
+                = link_to t('.no_result'),edit_match_tournament_path(id: t.id,winner: 'NO-RESULT'), method: :post,'class': 'btn btn-primary match_result',remote: true
 
-          #captions.hidden{:id => t.id,'data-winner': t('.winner'), 'data-white': t('.white'), 'data-black': t('.black'), 'data-draw': t('.draw')}
+            #captions.hidden{:id => t.id,'data-winner': t('.winner'), 'data-white': t('.white'), 'data-black': t('.black'), 'data-draw': t('.draw')}
 
-          %div#result.text-center.h4{:id => t.id}
-            - if t.result.eql?('WHITE')
-              = t('.winner') + t('.white')
-            - elsif t.result.eql?('BLACK')
-              = t('.winner') + t('.black')
-            - elsif t.result.eql?('DRAW')
-              = t('.winner') + t('.draw')
+            %div#result.text-center.h4{:id => t.id}
+              - if t.result.eql?('WHITE')
+                = t('.winner') + t('.white')
+              - elsif t.result.eql?('BLACK')
+                = t('.winner') + t('.black')
+              - elsif t.result.eql?('DRAW')
+                = t('.winner') + t('.draw')
