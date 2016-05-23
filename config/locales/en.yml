@@ -33,6 +33,7 @@ en:
   tournament-t: "type"
   tournaments-list: "List of tournaments"
   your_profile: "Show profile"
+  my_tournaments: "My tournaments"
 
   notice:
     registered: "You have been registered"
@@ -64,6 +65,8 @@ en:
         date_of_birth: "Date of birth"
         admin: "Administrator"
         age: "Age"
+        full_name: "Full name"
+        rating: "Rating"
       address:
         city: "City"
         zip_code: "Zip code"
@@ -81,8 +84,8 @@ en:
       started: "Started tournaments"
       finished: "Past tournaments"
       details: "Details"
-      results: "Results"
     details:
+      results: "Results"
       next_round: "Next round"
       tournament_result: "Results of the tournament"
       finish_tournament: "Finish tournament"

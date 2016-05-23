@@ -1,17 +1,13 @@
 %table.table.table-striped
   %tr
-    %th.span1
-      = t('.full_name')
-    %th
-      = t('.email')
-    %th
-      = t('.date_of_birth')
+    - [:full_name, :age, :rating].each do |f|
+      %th
+        = Player.human_attribute_name f
   %tbody
     - @players.each do |p|
       %tr
         %td.h4
           = link_to p, player_path(p)
-        %td
-          = p.email
-        %td
-          = p.date_of_birth
+        - [:age, :rating].each do |f|
+          %td
+            = p.send f

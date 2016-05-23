@@ -14,6 +14,7 @@
   .row
     .col-md-offset-9.col-md-3
       =link_to t('.players'), players_tournament_path(round: @tournament.round),'class': 'btn btn-sm btn-info'
+      = link_to t('.results'), results_tournament_path(@tournament), 'class': 'btn btn-sm btn-info'
       - if player_signed_in? && current_player.admin?
         - if @tournament[:round].eql?(@tournament[:rounds])
           =link_to t('.finish_tournament'), next_round_tournament_path(tournament_id: @tournament.id,round: @tournament.round), method: :post, 'class': 'btn btn-sm btn-warning',remote: true

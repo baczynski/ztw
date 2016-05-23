@@ -35,6 +35,9 @@ jQuery ->
       else
         $('#result_' + match_id).hide()
 
+    $('#accordion a:not([data-method])').on 'click', (e) ->
+      e.stopPropagation()
+
   change_rules = ->
     select = $('select#tournament_rule_type')
     op = select.find('option:selected')

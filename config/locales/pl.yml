@@ -11,7 +11,7 @@ pl:
   begin: "od"
   tournament-t: "turniej typu"
   tournaments-list: "Lista turniejów"
-  your_profile: "Twój profil"
+  your_profile: "Mój profil"
   my_tournaments: "Moje turnieje"
 
   will_paginate:
@@ -49,6 +49,8 @@ pl:
         date_of_birth: "Data urodzenia"
         admin: "Administrator"
         age: "Wiek"
+        full_name: "Imię i nazwisko"
+        rating: "Ranking"
       address:
         city: "Miasto"
         zip_code: "Kod pocztowy"
@@ -66,8 +68,8 @@ pl:
       started: "Rozpoczęte turnieje"
       finished: "Zakończone turnieje"
       details: "Szczegóły"
-      results: "Wyniki"
     details:
+      results: "Wyniki"
       next_round: "Następna runda"
       tournament_result: "Wyniki turnieju"
       finish_tournament: "Zakończ turniej"
