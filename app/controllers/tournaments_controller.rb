@@ -71,14 +71,12 @@ class TournamentsController < ApplicationController
   end
 
   def results
-
     @tournament = Tournament.find(params[:id])
     @matches= @tournament.matches
     @players= @tournament.players
-
   end
 
-  private
+private
   def tournament_params
     params.require(:tournament).permit(:name, :description, :start_date, :tournament_type, :rounds,
                                       :rule_type)

@@ -20,7 +20,7 @@ class Player < ActiveRecord::Base
   before_update :update_coefficient, if: :rating_changed?
 
   def matches
-    white_matches.merge black_matches
+    self.white_matches | self.black_matches
   end
 
   def full_name

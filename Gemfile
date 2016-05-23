@@ -45,6 +45,9 @@ gem 'devise'
 # Jobs scheduler
 gem 'delayed_job_active_record'
 
+# Highcharts lazy API
+gem 'lazy_high_charts'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

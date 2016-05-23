@@ -20,6 +20,7 @@
             %li= link_to t('my_tournaments'), players_tournaments_player_path(current_player)
             %li= link_to t('your_profile'), player_path(current_player)
             %li= link_to t('edit_player'), edit_player_registration_path
+            %li= link_to t('progression_chart'), chart_player_path(current_player)
             %li= link_to t('sign_out'), destroy_player_session_path, method: :delete
       - else
         %li= link_to t('sign_up'), new_player_registration_path

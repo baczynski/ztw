@@ -13,6 +13,7 @@ pl:
   tournaments-list: "Lista turniejów"
   your_profile: "Mój profil"
   my_tournaments: "Moje turnieje"
+  progression_chart: "Mój wykres postępu"
 
   will_paginate:
     next_label: "Dalej &rarr;"

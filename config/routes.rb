@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :players, only: [:show] do
       member do
         get 'players_tournaments'
+        get 'chart'
       end
     end
     root to: 'tournaments#index'
