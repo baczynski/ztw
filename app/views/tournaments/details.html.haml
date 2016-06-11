@@ -12,7 +12,7 @@
 
 - if @tournament.players.count > 0
   .row
-    .col-md-offset-9.col-md-3
+    .col-md-offset-8.col-md-4
       =link_to t('.players'), players_tournament_path(round: @tournament.round),'class': 'btn btn-sm btn-info'
       = link_to t('.results'), results_tournament_path(@tournament), 'class': 'btn btn-sm btn-info'
       - if player_signed_in? && current_player.admin?

@@ -6,6 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 ActiveRecord::Base.transaction do
+  Delayed::Job.delete_all
+
   Tournament.delete_all
 
   Player.where.not(admin: true).delete_all
